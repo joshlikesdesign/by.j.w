@@ -104,7 +104,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 £{product.price}
               </span>
               <a 
-                href={`mailto:contact@example.com?subject=Inquiry about ${product.name}`}
+                href={`mailto:joshwilburne@gmail.com?subject=Inquiry about ${product.name}`}
                 className="inline-block w-full md:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-foreground text-light font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-80 transition-opacity duration-300 text-center md:ml-auto"
               >
                 CONTACT FOR PURCHASE
