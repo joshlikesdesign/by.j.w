@@ -1,6 +1,6 @@
 'use client'
 
-import Navigation from '@/components/Navigation'
+import Image from 'next/image'
 import Logo from '@/components/Logo'
 import { useState, useRef, useEffect } from 'react'
 
@@ -36,8 +36,19 @@ export default function Gallery() {
   const [currentPage, setCurrentPage] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const observerTarget = useRef<HTMLDivElement>(null)
+
+  // Check if mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const loadMoreImages = (page: number) => {
     setIsLoading(true)
@@ -102,69 +113,79 @@ export default function Gallery() {
 
   return (
     <main className="min-h-screen bg-paper">
-      <Navigation />
       <Logo />
       
-      <div className="pt-32 pb-32">
-        <div className="max-w-[1400px] mx-auto px-8 md:px-16">
+      <div className="pt-20 sm:pt-24 md:pt-32 pb-16 sm:pb-24 md:pb-32">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-16">
           {/* Page header */}
-          <div className="mb-20">
+          <div className="mb-12 sm:mb-16 md:mb-20">
             <h1 
-              className="font-serif text-[120px] leading-[132px] text-[#352d25] tracking-[-2.4px] mb-4"
+              className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-[120px] leading-tight text-[#352d25] tracking-tight mb-4"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
             >
               Gallery
             </h1>
-            <p className="text-muted text-lg font-light max-w-2xl">
+            <p className="text-muted text-base sm:text-lg font-light max-w-2xl">
               A visual collection of work in progress, finished pieces, and moments from the studio.
             </p>
           </div>
 
-          {/* Gallery grid - 3 columns */}
+          {/* Gallery grid - responsive columns */}
           <div 
             ref={containerRef}
             className="relative"
           >
-            <div className="grid grid-cols-3 gap-8 auto-rows-max">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 auto-rows-max">
               {displayedImages.map((image, index) => (
                 <div
                   key={index}
                   className={`relative group ${
-                    image.isExpanded ? 'col-span-3' : ''
+                    image.isExpanded && !isMobile ? 'col-span-1 sm:col-span-2 lg:col-span-3' : ''
                   }`}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  onMouseEnter={() => !isMobile && setHoveredIndex(index)}
+                  onMouseLeave={() => !isMobile && setHoveredIndex(null)}
                 >
                   <div
                     className={`relative overflow-hidden bg-stone-200 shadow-lg transition-all duration-500 ${
-                      image.isExpanded 
+                      image.isExpanded && !isMobile
                         ? 'aspect-[4/3]' 
                         : 'aspect-[3/4]'
                     }`}
                   >
-                    <img
+                    <Image
                       src={image.src}
                       alt={`Gallery image ${index + 1}`}
-                      className="w-full h-full object-cover"
-                      draggable={false}
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none'
-                      }}
+                      fill
+                      sizes={image.isExpanded && !isMobile
+                        ? "(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 100vw"
+                        : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      }
+                      className="object-cover"
+                      quality={70}
+                      loading={index < 6 ? "eager" : "lazy"}
                     />
-                    {/* Expand button - shows on hover */}
-                    {hoveredIndex === index && !image.isExpanded && (
+                    {/* Expand button - only on desktop */}
+                    {!isMobile && !image.isExpanded && (
                       <button
-                        onClick={() => toggleExpand(index)}
-                        className="absolute bottom-4 right-4 px-4 py-2 bg-white/90 hover:bg-white text-stone-800 text-xs font-sans tracking-wide uppercase transition-all duration-300 opacity-0 group-hover:opacity-100"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          toggleExpand(index)
+                        }}
+                        className="absolute bottom-4 right-4 px-4 py-2 bg-white/90 hover:bg-white text-stone-800 text-xs font-sans tracking-wide uppercase transition-all duration-300 opacity-0 group-hover:opacity-100 z-10"
                       >
                         Expand
                       </button>
                     )}
-                    {/* Collapse button - shows when expanded */}
-                    {image.isExpanded && (
+                    {/* Collapse button - only on desktop */}
+                    {!isMobile && image.isExpanded && (
                       <button
-                        onClick={() => toggleExpand(index)}
-                        className="absolute top-4 right-4 px-4 py-2 bg-white/90 hover:bg-white text-stone-800 text-xs font-sans tracking-wide uppercase transition-all duration-300"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          toggleExpand(index)
+                        }}
+                        className="absolute top-4 right-4 px-4 py-2 bg-white/90 hover:bg-white text-stone-800 text-xs font-sans tracking-wide uppercase transition-all duration-300 z-10"
                       >
                         Collapse
                       </button>

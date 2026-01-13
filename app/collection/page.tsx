@@ -1,65 +1,26 @@
 import Link from 'next/link'
-import Navigation from '@/components/Navigation'
+import Image from 'next/image'
 import Logo from '@/components/Logo'
-
-// Mock product data - replace with real data later
-const products = [
-  {
-    id: '1',
-    name: 'Thrown Bowl',
-    price: 85,
-    image: '/images/L1008197.JPG',
-    description: 'Stoneware bowl, hand-thrown',
-  },
-  {
-    id: '2',
-    name: 'Celadon Vase',
-    price: 120,
-    image: '/images/DSCF4413.JPG',
-    description: 'Glazed celadon, one-of-a-kind',
-  },
-  {
-    id: '3',
-    name: 'Moss Glazed Plate',
-    price: 65,
-    image: '/images/DSC05727.JPG',
-    description: 'Dinner plate with moss glaze',
-  },
-  {
-    id: '4',
-    name: 'Tall Cylinder',
-    price: 150,
-    image: '/images/DSCF4383.JPG',
-    description: 'Tall stoneware vessel',
-  },
-  {
-    id: '5',
-    name: 'Shallow Dish',
-    price: 55,
-    image: '/images/L1008225.JPG',
-    description: 'Hand-built shallow dish',
-  },
-]
+import { products } from './data'
 
 export default function Collection() {
   return (
     <main className="min-h-screen pt-24">
-      <Navigation />
       <Logo />
       
-      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-12 sm:py-16 md:py-24">
         {/* Page header */}
-        <div className="mb-20 md:mb-32">
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-earth mb-4">
+        <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-32">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-earth mb-4">
             Collection
           </h1>
-          <p className="text-stone-600 text-lg font-light max-w-2xl">
+          <p className="text-stone-600 text-base sm:text-lg font-light max-w-2xl">
             Each piece is unique, made by hand in our London studio.
           </p>
         </div>
 
         {/* Vertical gallery layout */}
-        <div className="space-y-32 md:space-y-40">
+        <div className="space-y-16 sm:space-y-24 md:space-y-32 lg:space-y-40">
           {products.map((product, index) => (
             <Link 
               key={product.id}
@@ -69,11 +30,15 @@ export default function Collection() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
                 {/* Image */}
                 <div className={`flex-1 ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
-                  <div className="aspect-[3/4] bg-stone-200 overflow-hidden">
-                    <img
+                  <div className="relative aspect-[3/4] bg-stone-200 overflow-hidden">
+                    <Image
                       src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      alt={product.imageAlt || product.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      quality={75}
+                      loading={index < 2 ? "eager" : "lazy"}
                     />
                   </div>
                 </div>
@@ -102,6 +67,23 @@ export default function Collection() {
           ))}
         </div>
       </div>
+
+      {/* Gallery Navigation */}
+      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-20 bg-paper border-t border-foreground/10 mt-16 sm:mt-24">
+        <div className="max-w-[1280px] mx-auto">
+          <Link
+            href="/gallery"
+            className="group inline-flex items-center gap-3 hover:opacity-60 transition-opacity"
+          >
+            <span className="font-sans text-xs sm:text-[13px] font-normal tracking-[1.04px] uppercase text-foreground">
+              VIEW GALLERY OF WORKS
+            </span>
+            <svg width="24" height="12" viewBox="0 0 24 12" fill="none" className="group-hover:translate-x-1 transition-transform">
+              <path d="M0 6H22M22 6L17 1M22 6L17 11" stroke="#2B2621" strokeWidth="1.5"/>
+            </svg>
+          </Link>
+        </div>
+      </section>
     </main>
   )
 }

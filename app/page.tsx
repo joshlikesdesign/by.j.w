@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import Navigation from '@/components/Navigation'
 import Logo from '@/components/Logo'
 import { useRef, useState, useEffect } from 'react'
 
@@ -11,6 +10,9 @@ export default function Home() {
   const [textColor, setTextColor] = useState('rgba(255, 234, 214, 1)')
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return
+
     const handleMouseMove = (e: MouseEvent) => {
       // Calculate color based on mouse position
       // Using HSL for smooth color transitions
@@ -21,12 +23,16 @@ export default function Home() {
       setTextColor(`hsl(${hue}, ${saturation}%, ${lightness}%)`)
     }
 
+    // Add event listener
     window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
   }, [])
   return (
     <main className="relative">
-      <Navigation />
       <Logo />
 
       {/* Hero Section - 90% height with background image - scrolls over text */}
@@ -41,7 +47,7 @@ export default function Home() {
             className="object-cover"
             style={{ objectPosition: 'center top' }}
             priority
-            quality={90}
+            quality={75}
           />
         </div>
         
@@ -56,15 +62,13 @@ export default function Home() {
       </section>
 
       {/* Fixed headline - pinned to viewport, disappears behind hero on scroll */}
-      <div className="fixed top-[25vh] left-1/2 -translate-x-1/2 z-[16] max-w-[1280px] w-full px-8 md:px-16 text-center mix-blend-difference">
+      <div className="fixed top-[15vh] sm:top-[20vh] md:top-[25vh] left-1/2 -translate-x-1/2 z-[16] max-w-[1280px] w-full px-4 sm:px-8 md:px-16 text-center mix-blend-difference pointer-events-none">
           <h1 
-            className="font-serif leading-[1] tracking-tight text-[48px] sm:text-[64px] md:text-[96px] lg:text-[128px] xl:text-[160px] 2xl:text-[180pt] transition-all duration-300 ease-out"
+            className="font-serif leading-[1.1] tracking-tight text-[48px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[128px] 2xl:text-[160px]"
             style={{ 
               fontVariationSettings: "'SOFT' 0, 'WONK' 1",
               color: textColor,
               fontWeight: 600,
-              fontSize: '180px',
-              transition: 'color 0.3s ease-out'
             }}
           >
           Ceramics made by hand in East London.
@@ -72,29 +76,65 @@ export default function Home() {
       </div>
 
       {/* Centered Image Section - Two images overlapping */}
-      <section className="relative px-8 md:px-16 py-32 z-[15] bg-paper">
-        <div className="max-w-[1152px] mx-auto relative" style={{ height: '1100px' }}>
-          {/* First image - positioned from left, slightly above */}
-          <div className="absolute left-[193px] top-[-21px] w-[608px] h-[768px] overflow-hidden">
-            <img
-              src="/images/L1008208.JPG"
-              alt="Ceramic vessel"
-              className="w-full h-full object-cover"
-            />
+      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-[15] bg-paper">
+        <div className="max-w-[1152px] mx-auto relative">
+          {/* Mobile: Stack images vertically */}
+          <div className="md:hidden space-y-8">
+            <div className="relative aspect-[3/4] w-full max-w-md mx-auto overflow-hidden">
+              <Image
+                src="/images/L1008208.JPG"
+                alt="Ceramic vessel"
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="object-cover"
+                quality={75}
+                loading="lazy"
+              />
+            </div>
+            <div className="relative aspect-[3/4] w-full max-w-md mx-auto overflow-hidden">
+              <Image
+                src="/images/DSCF4403.JPG"
+                alt="Ceramic vessel"
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="object-cover"
+                quality={75}
+                loading="lazy"
+              />
+            </div>
           </div>
-          {/* Second image - overlaps horizontally and vertically */}
-          <div className="absolute left-[576px] top-[400px] w-[608px] h-[768px] overflow-hidden">
-            <img
-              src="/images/DSCF4403.JPG"
-              alt="Ceramic vessel"
-              className="w-full h-full object-cover"
-            />
+          {/* Desktop: Overlapping images */}
+          <div className="hidden md:block relative" style={{ height: '1100px' }}>
+            {/* First image - positioned from left, slightly above */}
+            <div className="absolute left-[193px] top-[-21px] w-[608px] h-[768px] overflow-hidden">
+              <Image
+                src="/images/L1008208.JPG"
+                alt="Ceramic vessel"
+                fill
+                sizes="608px"
+                className="object-cover"
+                quality={75}
+                loading="lazy"
+              />
+            </div>
+            {/* Second image - overlaps horizontally and vertically */}
+            <div className="absolute left-[576px] top-[400px] w-[608px] h-[768px] overflow-hidden">
+              <Image
+                src="/images/DSCF4403.JPG"
+                alt="Ceramic vessel"
+                fill
+                sizes="608px"
+                className="object-cover"
+                quality={75}
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Typography Section - covers fixed h1 on scroll */}
-      <section ref={targetSectionRef} className="relative px-8 md:px-16 py-32 z-20 bg-paper">
+      <section ref={targetSectionRef} className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-20 bg-paper">
         {/* Gradient overlay at top - transitions from transparent to full bg color */}
         <div 
           className="absolute top-0 left-0 right-0 z-[1] pointer-events-none"
@@ -105,7 +145,7 @@ export default function Home() {
         />
         <div className="relative z-[2] max-w-[768px] mx-auto">
           <p 
-            className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-[64px] leading-tight text-foreground tracking-tight"
+            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] leading-tight text-foreground tracking-tight"
             style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
           >
             Each piece is deliberately imperfect, showing the hand and the process. The objects carry the marks of their making.
@@ -114,39 +154,73 @@ export default function Home() {
       </section>
 
       {/* Editorial Image Pair Section */}
-      <section className="relative px-8 md:px-16 py-24 z-20 bg-paper">
-        <div className="max-w-[1280px] mx-auto relative h-[938px]">
-          {/* Left image - starts lower */}
-          <div className="absolute left-0 top-[128px] w-[47.5%] aspect-[608/810.664] overflow-hidden">
-            <img
+      <section className="relative px-4 sm:px-8 md:px-16 py-12 sm:py-16 md:py-24 z-20 bg-paper">
+        {/* Mobile: Stack images */}
+        <div className="md:hidden space-y-8 max-w-md mx-auto">
+          <div className="relative aspect-[3/4] w-full overflow-hidden">
+            <Image
               src="/images/L1008186.JPG"
               alt="Potter working with clay"
-              className="w-full h-full object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, 400px"
+              className="object-cover"
+              quality={75}
+              loading="lazy"
+            />
+          </div>
+          <div className="relative aspect-[3/4] w-full overflow-hidden">
+            <Image
+              src="/images/DSCF4399.JPG"
+              alt="Finished ceramic pieces"
+              fill
+              sizes="(max-width: 768px) 100vw, 400px"
+              className="object-cover"
+              quality={75}
+              loading="lazy"
+            />
+          </div>
+        </div>
+        {/* Desktop: Side by side */}
+        <div className="hidden md:block max-w-[1280px] mx-auto relative h-[938px]">
+          {/* Left image - starts lower */}
+          <div className="absolute left-0 top-[128px] w-[47.5%] aspect-[608/810.664] overflow-hidden">
+            <Image
+              src="/images/L1008186.JPG"
+              alt="Potter working with clay"
+              fill
+              sizes="47.5vw"
+              className="object-cover"
+              quality={75}
+              loading="lazy"
             />
           </div>
           {/* Right image - starts at top */}
           <div className="absolute right-0 top-0 w-[47.5%] aspect-[608/810.664] overflow-hidden">
-            <img
+            <Image
               src="/images/DSCF4399.JPG"
               alt="Finished ceramic pieces"
-              className="w-full h-full object-cover"
+              fill
+              sizes="47.5vw"
+              className="object-cover"
+              quality={75}
+              loading="lazy"
             />
           </div>
         </div>
       </section>
 
       {/* Text and CTA Section */}
-      <section className="relative px-8 md:px-16 py-48 z-20 bg-paper">
+      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-48 z-20 bg-paper">
         <div className="max-w-[896px] mx-auto">
-          <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-start">
+          <div className="flex flex-col md:flex-row gap-8 sm:gap-12 md:gap-24 items-start">
             <div className="flex-1">
               <h2 
-                className="mb-6 font-serif text-[32px] leading-[41.6px] text-foreground"
+                className="mb-4 sm:mb-6 font-serif text-2xl sm:text-3xl md:text-[32px] leading-tight text-foreground"
                 style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
               >
                 Material & Process
               </h2>
-              <p className="font-sans text-[15px] font-light leading-[27px] text-muted">
+              <p className="font-sans text-sm sm:text-[15px] font-light leading-relaxed text-muted">
                 Working primarily with stoneware, each piece is fired to high temperature in electric. Glazes are then applied by hand and the final piece is fired to over 1200ºC to make them dishwasher and microwave safe.
               </p>
             </div>
@@ -155,7 +229,7 @@ export default function Home() {
                 href="/collection"
                 className="group inline-flex items-center gap-3 hover:opacity-60 transition-opacity"
               >
-                <span className="font-sans text-[13px] font-normal tracking-[1.04px] uppercase text-foreground">
+                <span className="font-sans text-xs sm:text-[13px] font-normal tracking-[1.04px] uppercase text-foreground">
                   VIEW COLLECTION
                 </span>
                 <svg width="24" height="12" viewBox="0 0 24 12" fill="none" className="group-hover:translate-x-1 transition-transform">
@@ -168,10 +242,10 @@ export default function Home() {
       </section>
 
       {/* Final spacer */}
-      <div className="h-48" />
+      <div className="relative h-12 bg-paper z-[17]" />
 
       {/* Footer */}
-      <footer className="relative px-8 md:px-16 py-12 z-20 bg-paper border-t border-foreground/10">
+      <footer className="relative px-4 sm:px-8 md:px-16 py-8 sm:py-12 z-20 bg-paper border-t border-foreground/10">
         <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-muted font-sans text-sm">
             © Josh Wilburne

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 
 interface ExpandableImageProps {
@@ -13,14 +14,18 @@ export default function ExpandableImage({ src, alt }: ExpandableImageProps) {
   return (
     <div className="relative">
       <div 
-        className={`bg-stone-200 overflow-hidden transition-all duration-500 ease-in-out ${
+        className={`relative bg-stone-200 overflow-hidden transition-all duration-500 ease-in-out ${
           isExpanded ? 'aspect-[3/6]' : 'aspect-[3/4]'
         }`}
       >
-        <img
+        <Image
           src={src}
           alt={alt}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+          quality={75}
+          loading="lazy"
         />
       </div>
       <button
