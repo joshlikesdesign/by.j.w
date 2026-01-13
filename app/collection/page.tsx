@@ -29,8 +29,8 @@ export default function Collection() {
             >
               <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
                 {/* Image */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
-                  <div className="relative aspect-[3/4] bg-paper overflow-hidden">
+                <div className={`flex-1 w-full ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
+                  <div className="relative w-full aspect-[3/4] bg-paper overflow-hidden">
                     <Image
                       src={product.image}
                       alt={product.imageAlt || product.name}
