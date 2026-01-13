@@ -11,10 +11,10 @@ export default function Collection() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-12 sm:py-16 md:py-24">
         {/* Page header */}
         <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-32">
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-earth mb-4">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-foreground mb-4">
             Collection
           </h1>
-          <p className="text-stone-600 text-base sm:text-lg font-light max-w-2xl">
+          <p className="text-muted text-base sm:text-lg font-light max-w-2xl">
             Each piece is unique, made by hand in our London studio.
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function Collection() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
                 {/* Image */}
                 <div className={`flex-1 ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
-                  <div className="relative aspect-[3/4] bg-stone-200 overflow-hidden">
+                  <div className="relative aspect-[3/4] bg-paper overflow-hidden">
                     <Image
                       src={product.image}
                       alt={product.imageAlt || product.name}
@@ -46,17 +46,17 @@ export default function Collection() {
                 {/* Text content */}
                 <div className={`flex-1 flex flex-col justify-center ${index % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}>
                   <div className="space-y-4">
-                    <h2 className="font-serif text-3xl md:text-4xl text-earth">
+                    <h2 className="font-serif text-3xl md:text-4xl text-foreground">
                       {product.name}
                     </h2>
-                    <p className="text-stone-600 font-light text-lg leading-relaxed">
+                    <p className="text-muted font-light text-lg leading-relaxed">
                       {product.description}
                     </p>
                     <div className="flex items-center gap-4 pt-2">
-                      <span className="font-sans text-xl text-earth">
+                      <span className="font-sans text-xl text-foreground">
                         £{product.price}
                       </span>
-                      <span className="text-sm text-stone-500 uppercase tracking-wide">
+                      <span className="text-sm text-muted uppercase tracking-wide">
                         One of a kind
                       </span>
                     </div>
