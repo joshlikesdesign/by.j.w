@@ -9,32 +9,10 @@ interface ImageData {
   isExpanded: boolean
 }
 
-// All available images
-const allImages = [
-  '/images/L1008208.JPG', '/images/DSCF4403.JPG', '/images/L1008186.JPG', '/images/L1008197.JPG',
-  '/images/DSCF4413.JPG', '/images/L1008225.JPG', '/images/DSC05727.JPG', '/images/L1008235.JPG',
-  '/images/IMG_6297.jpeg', '/images/DSCF4383.JPG', '/images/DSC05728.JPG', '/images/DSC05710.JPG',
-  '/images/DSC05712.JPG', '/images/DSC05713.JPG', '/images/DSC05732.JPG', '/images/DSCF4399.JPG',
-  '/images/IMG_6163.jpeg', '/images/DSC05686.JPG', '/images/DSC05692.JPG', '/images/DSCF4362.JPG',
-  '/images/DSCF4372.JPG', '/images/DSCF4378.JPG', '/images/DSCF4389.JPG', '/images/DSCF4393.JPG',
-  '/images/DSCF4397.JPG', '/images/DSCF4410.JPG', '/images/DSCF4416.JPG', '/images/DSCF4479.JPG',
-  '/images/DSCF4483.JPG', '/images/IMG_6262.jpeg', '/images/IMG_6264.jpeg', '/images/IMG_6281.jpeg',
-  '/images/L1008173.JPG', '/images/L1008166.JPG', '/images/me_bw.jpeg', '/images/IMG_6283.jpeg',
-  '/images/IMG_6292.jpeg', '/images/IMG_6307.jpeg', '/images/IMG_6314.jpeg', '/images/IMG_6317.jpeg',
-  '/images/L1008172.JPG', '/images/L1008175.JPG', '/images/L1008176.JPG', '/images/L1008177.JPG',
-  '/images/L1008178.JPG', '/images/L1008182.JPG', '/images/L1008185.JPG', '/images/L1008192.JPG',
-  '/images/L1008195.JPG', '/images/L1008201.JPG', '/images/L1008209.JPG', '/images/L1008213.JPG',
-  '/images/L1008215.JPG', '/images/L1008221.JPG', '/images/L1008228.JPG', '/images/L1008229.JPG',
-  '/images/L1008230.JPG', '/images/L1008232.JPG', '/images/L1008234.JPG', '/images/L1008237.JPG',
-  '/images/DSC05721.JPG', '/images/DSC05722.JPG', '/images/DSC05723.JPG', '/images/L1008250.JPG',
-  '/images/L1008256.JPG', '/images/L1008259.JPG', '/images/L1008260.JPG', '/images/L1008263.JPG',
-  '/images/L1008264.JPG', '/images/L1008267.JPG', '/images/L1008271.JPG', '/images/L1008274.JPG',
-  '/images/L1008277.JPG',
-]
-
 const IMAGES_PER_PAGE = 12 // 3 columns x 4 rows
 
 export default function Gallery() {
+  const [allImages, setAllImages] = useState<string[]>([])
   const [displayedImages, setDisplayedImages] = useState<ImageData[]>([])
   const [currentPage, setCurrentPage] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
@@ -42,6 +20,22 @@ export default function Gallery() {
   const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const observerTarget = useRef<HTMLDivElement>(null)
+
+  // Fetch sorted images on mount
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch('/api/gallery-images')
+        const data = await response.json()
+        if (data.images) {
+          setAllImages(data.images)
+        }
+      } catch (error) {
+        console.error('Error fetching images:', error)
+      }
+    }
+    fetchImages()
+  }, [])
 
   // Check if mobile
   useEffect(() => {
@@ -53,15 +47,15 @@ export default function Gallery() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const loadMoreImages = (page: number) => {
+  const loadMoreImages = (page: number, images: string[]) => {
     setIsLoading(true)
     const startIndex = page * IMAGES_PER_PAGE
-    const endIndex = Math.min(startIndex + IMAGES_PER_PAGE, allImages.length)
+    const endIndex = Math.min(startIndex + IMAGES_PER_PAGE, images.length)
     const newImages: ImageData[] = []
     
     for (let i = startIndex; i < endIndex; i++) {
       newImages.push({
-        src: allImages[i],
+        src: images[i],
         isExpanded: false,
       })
     }
@@ -84,19 +78,23 @@ export default function Gallery() {
     })
   }
 
-  // Load initial images
+  // Load initial images when allImages is available
   useEffect(() => {
-    loadMoreImages(0)
-  }, [])
+    if (allImages.length > 0 && displayedImages.length === 0) {
+      loadMoreImages(0, allImages)
+    }
+  }, [allImages])
 
   // Intersection Observer for infinite scroll
   useEffect(() => {
+    if (allImages.length === 0) return // Wait for images to load
+    
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !isLoading && displayedImages.length < allImages.length) {
           const nextPage = currentPage + 1
           setCurrentPage(nextPage)
-          loadMoreImages(nextPage)
+          loadMoreImages(nextPage, allImages)
         }
       },
       { threshold: 0.1 }
@@ -112,7 +110,7 @@ export default function Gallery() {
         observer.unobserve(currentTarget)
       }
     }
-  }, [currentPage, isLoading, displayedImages.length])
+  }, [currentPage, isLoading, displayedImages.length, allImages.length, allImages])
 
   return (
     <main className="min-h-screen bg-paper">
