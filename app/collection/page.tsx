@@ -68,7 +68,7 @@ export default function Collection() {
         </div>
       </div>
 
-      {/* Gallery Navigation */}
+      {/* Archive Navigation */}
       <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-20 bg-paper border-t border-foreground/10 mt-16 sm:mt-24">
         <div className="max-w-[1280px] mx-auto">
           <Link
@@ -76,7 +76,7 @@ export default function Collection() {
             className="group inline-flex items-center gap-3 hover:opacity-60 transition-opacity"
           >
             <span className="font-sans text-xs sm:text-[13px] font-normal tracking-[1.04px] uppercase text-foreground">
-              VIEW GALLERY OF WORKS
+              VIEW ARCHIVE OF WORKS
             </span>
             <svg width="24" height="12" viewBox="0 0 24 12" fill="none" className="group-hover:translate-x-1 transition-transform">
               <path d="M0 6H22M22 6L17 1M22 6L17 11" stroke="#2B2621" strokeWidth="1.5"/>

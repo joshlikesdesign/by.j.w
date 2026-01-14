@@ -123,7 +123,7 @@ export default function Gallery() {
               className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-[120px] leading-tight text-[#352d25] tracking-tight mb-4"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
             >
-              Gallery
+              Archive of Works
             </h1>
             <p className="text-muted text-base sm:text-lg font-light max-w-2xl">
               A visual collection of work in progress, finished pieces, and moments from the studio.
@@ -154,7 +154,7 @@ export default function Gallery() {
                   >
                     <Image
                       src={image.src}
-                      alt={`Gallery image ${index + 1}`}
+                      alt={`Archive image ${index + 1}`}
                       fill
                       sizes={image.isExpanded && !isMobile
                         ? "(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 100vw"

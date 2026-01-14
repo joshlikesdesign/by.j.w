@@ -146,7 +146,7 @@ export default function Navigation() {
                 }}
                 className="block hover:opacity-60 transition-opacity font-serif text-4xl md:text-5xl lg:text-6xl text-light"
               >
-                Gallery
+                Archive of Works
               </Link>
             </li>
           </ul>
