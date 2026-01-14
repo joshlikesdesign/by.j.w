@@ -51,7 +51,7 @@ export const products = [
     id: '4',
     name: 'Crazed Amber Bud Vase',
     category: 'Decor',
-    price: 45,
+    price: 38,
     image: '/images/DSC05732.JPG',
     image2: '/images/DSC05727.JPG',
     imageAlt: 'High-gloss amber bud vase with intentional crackle glaze finish in warm amber tone.',
