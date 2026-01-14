@@ -66,7 +66,7 @@ export const products = [
     id: '5',
     name: 'Speckled Moon Vase',
     category: 'Decor',
-    price: 35,
+    price: 48,
     image: '/images/DSCF4410.JPG',
     image2: '/images/DSCF4399.JPG',
     imageAlt: 'Small spherical bud vase with sage green and cream glaze and heavy iron speckling.',
