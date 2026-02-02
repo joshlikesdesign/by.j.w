@@ -43,10 +43,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           <div className="mb-16">
             <ProductImageGallery
               mainImage={product.image}
-              thumbnails={product.image2 ? [product.image2] : []}
+              thumbnails={[product.image2, product.image3, product.image4].filter(Boolean) as string[]}
               alt={product.name}
               mainImageAlt={product.imageAlt}
-              thumbnailAlts={product.image2Alt ? [product.image2Alt] : []}
+              thumbnailAlts={[product.image2Alt, product.image3Alt, product.image4Alt].filter(Boolean) as string[]}
             />
           </div>
 
