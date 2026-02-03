@@ -40,12 +40,12 @@ export default function Home() {
         {/* Background image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/bg_cropped.jpg"
+            src="/images/bg_cropped2.jpg"
             alt=""
             fill
             sizes="100vw"
             className="object-cover"
-            style={{ objectPosition: 'center top' }}
+            style={{ objectPosition: 'center bottom' }}
             priority
             quality={75}
           />

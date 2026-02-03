@@ -37,7 +37,17 @@ export default function About() {
               className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
             >
-              I'm a London-based designer and potter making small, functional stoneware for everyday use.
+              I'm a London-based{' '}
+              <a
+                href="https://josh.computer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:opacity-60 transition-opacity"
+                aria-label="Josh's personal website"
+              >
+                designer
+              </a>
+              {' '}and potter making small, functional stoneware for everyday use.
             </p>
             <p 
               className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
@@ -122,13 +132,29 @@ export default function About() {
           </div>
 
           {/* Instagram link */}
-          <div className="max-w-[672px]">
+          <div className="max-w-[672px] space-y-3">
+            <p 
+              className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
+              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+            >
+              Feel free to see what I've been up to recently on{' '}
+              <a
+                href="https://instagram.com/by.j.w"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:opacity-60 transition-opacity"
+                aria-label="Instagram @by.j.w"
+              >
+                Instagram
+              </a>
+              .
+            </p>
             <a
               href="https://instagram.com/by.j.w"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 hover:opacity-60 transition-opacity"
-              aria-label="Instagram"
+              aria-label="Instagram @by.j.w"
             >
               <svg 
                 width="24" 

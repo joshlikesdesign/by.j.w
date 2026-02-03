@@ -2,14 +2,25 @@
 
 import Image from 'next/image'
 import Logo from '@/components/Logo'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
 interface ImageData {
   src: string
   isExpanded: boolean
+  loaded: boolean
 }
 
 const IMAGES_PER_PAGE = 12 // 3 columns x 4 rows
+
+// Fisher–Yates shuffle for random order
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
 
 export default function Gallery() {
   const [allImages, setAllImages] = useState<string[]>([])
@@ -18,20 +29,23 @@ export default function Gallery() {
   const [isLoading, setIsLoading] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [initialLoad, setInitialLoad] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
   const observerTarget = useRef<HTMLDivElement>(null)
 
-  // Fetch sorted images on mount
+  // Fetch images and shuffle order on mount
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const response = await fetch('/api/gallery-images')
         const data = await response.json()
-        if (data.images) {
-          setAllImages(data.images)
+        if (data.images && Array.isArray(data.images)) {
+          setAllImages(shuffleArray(data.images))
         }
       } catch (error) {
         console.error('Error fetching images:', error)
+      } finally {
+        setInitialLoad(false)
       }
     }
     fetchImages()
@@ -47,6 +61,9 @@ export default function Gallery() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
+  // Timeout fallback so skeletons never stay forever (broken/slow images)
+  const loadedTimeoutRef = useRef<Record<string, NodeJS.Timeout>>({})
+
   const loadMoreImages = (page: number, images: string[]) => {
     setIsLoading(true)
     const startIndex = page * IMAGES_PER_PAGE
@@ -54,10 +71,19 @@ export default function Gallery() {
     const newImages: ImageData[] = []
     
     for (let i = startIndex; i < endIndex; i++) {
+      const src = images[i]
       newImages.push({
-        src: images[i],
+        src,
         isExpanded: false,
+        loaded: false,
       })
+      // Fallback: mark as loaded after 6s so we never show skeleton forever
+      loadedTimeoutRef.current[src] = setTimeout(() => {
+        setDisplayedImages(prev =>
+          prev.map(img => (img.src === src ? { ...img, loaded: true } : img))
+        )
+        delete loadedTimeoutRef.current[src]
+      }, 6000)
     }
     
     setDisplayedImages(prev => {
@@ -66,6 +92,25 @@ export default function Gallery() {
       return updated
     })
   }
+
+  // Clear load timeouts on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(loadedTimeoutRef.current).forEach(clearTimeout)
+      loadedTimeoutRef.current = {}
+    }
+  }, [])
+
+  // Track loaded by src so we never mix up indices (fixes stuck skeletons)
+  const setImageLoaded = useCallback((src: string) => {
+    if (loadedTimeoutRef.current[src]) {
+      clearTimeout(loadedTimeoutRef.current[src])
+      delete loadedTimeoutRef.current[src]
+    }
+    setDisplayedImages(prev =>
+      prev.map(img => (img.src === src ? { ...img, loaded: true } : img))
+    )
+  }, [])
 
   const toggleExpand = (index: number) => {
     setDisplayedImages(prev => {
@@ -126,8 +171,21 @@ export default function Gallery() {
             >
               Archive of Works
             </h1>
-            <p className="text-muted text-base sm:text-lg font-light max-w-2xl">
+            <p className="text-muted text-base sm:text-lg font-light max-w-2xl mb-4">
               A visual collection of work in progress, finished pieces, and moments from the studio.
+            </p>
+            <p className="text-muted text-base sm:text-lg font-light max-w-2xl">
+              Feel free to see what I've been up to recently on{' '}
+              <a
+                href="https://instagram.com/by.j.w"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline hover:opacity-60 transition-opacity"
+                aria-label="Instagram @by.j.w"
+              >
+                Instagram
+              </a>
+              .
             </p>
           </div>
 
@@ -136,10 +194,18 @@ export default function Gallery() {
             ref={containerRef}
             className="relative"
           >
+            {/* Initial skeleton grid while fetching */}
+            {initialLoad && allImages.length === 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 auto-rows-max">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div key={`skeleton-${i}`} className="relative aspect-[3/4] overflow-hidden rounded-sm bg-stone-200/80 animate-pulse" />
+                ))}
+              </div>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 auto-rows-max">
               {displayedImages.map((image, index) => (
                 <div
-                  key={index}
+                  key={`${image.src}-${index}`}
                   className={`relative group ${
                     image.isExpanded && !isMobile ? 'col-span-1 sm:col-span-2 lg:col-span-3' : ''
                   }`}
@@ -147,12 +213,19 @@ export default function Gallery() {
                   onMouseLeave={() => !isMobile && setHoveredIndex(null)}
                 >
                   <div
-                    className={`relative overflow-hidden bg-stone-200 shadow-lg transition-all duration-500 ${
+                    className={`relative overflow-hidden shadow-lg transition-all duration-500 ${
                       image.isExpanded && !isMobile
                         ? 'aspect-[4/3]' 
                         : 'aspect-[3/4]'
                     }`}
                   >
+                    {/* Skeleton placeholder - visible until image loads */}
+                    {!image.loaded && (
+                      <div
+                        className="absolute inset-0 bg-stone-200/90 animate-pulse z-[1]"
+                        aria-hidden
+                      />
+                    )}
                     <Image
                       src={image.src}
                       alt={`Archive image ${index + 1}`}
@@ -161,9 +234,12 @@ export default function Gallery() {
                         ? "(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 100vw"
                         : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       }
-                      className="object-cover"
+                      className={`object-cover transition-opacity duration-300 ${image.loaded ? 'opacity-100' : 'opacity-0'}`}
                       quality={70}
                       loading={index < 6 ? "eager" : "lazy"}
+                      unoptimized
+                      onLoad={() => setImageLoaded(image.src)}
+                      onError={() => setImageLoaded(image.src)}
                     />
                     {/* Expand button - only on desktop */}
                     {!isMobile && !image.isExpanded && (
