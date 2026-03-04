@@ -5,9 +5,41 @@ import Image from 'next/image'
 import Logo from '@/components/Logo'
 import { useRef, useState, useEffect } from 'react'
 
+// Fallback images used until gallery loads and for SSR
+const DEFAULT_HOME_IMAGES = [
+  '/images/L1008208.JPG',
+  '/images/DSCF4403.JPG',
+  '/images/L1008186.JPG',
+  '/images/DSCF4399.JPG',
+]
+
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+
 export default function Home() {
   const targetSectionRef = useRef<HTMLElement>(null)
   const [textColor, setTextColor] = useState('rgba(255, 234, 214, 1)')
+  const [homeImages, setHomeImages] = useState<string[]>(DEFAULT_HOME_IMAGES)
+
+  // Randomise homepage images from gallery on load
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/gallery-images')
+      .then((res) => res.json())
+      .then((data: { images?: string[] }) => {
+        if (cancelled || !data?.images?.length) return
+        const pool = shuffleArray(data.images)
+        setHomeImages(pool.slice(0, 4))
+      })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [])
 
   useEffect(() => {
     // Only run on client side
@@ -82,7 +114,7 @@ export default function Home() {
           <div className="md:hidden space-y-8">
             <div className="relative aspect-[3/4] w-full max-w-md mx-auto overflow-hidden">
               <Image
-                src="/images/L1008208.JPG"
+                src={homeImages[0]}
                 alt="Ceramic vessel"
                 fill
                 sizes="(max-width: 768px) 100vw, 400px"
@@ -93,7 +125,7 @@ export default function Home() {
             </div>
             <div className="relative aspect-[3/4] w-full max-w-md mx-auto overflow-hidden">
               <Image
-                src="/images/DSCF4403.JPG"
+                src={homeImages[1]}
                 alt="Ceramic vessel"
                 fill
                 sizes="(max-width: 768px) 100vw, 400px"
@@ -108,7 +140,7 @@ export default function Home() {
             {/* First image - positioned from left, slightly above */}
             <div className="absolute left-[193px] top-[-21px] w-[608px] h-[768px] overflow-hidden">
               <Image
-                src="/images/L1008208.JPG"
+                src={homeImages[0]}
                 alt="Ceramic vessel"
                 fill
                 sizes="608px"
@@ -120,7 +152,7 @@ export default function Home() {
             {/* Second image - overlaps horizontally and vertically */}
             <div className="absolute left-[576px] top-[400px] w-[608px] h-[768px] overflow-hidden">
               <Image
-                src="/images/DSCF4403.JPG"
+                src={homeImages[1]}
                 alt="Ceramic vessel"
                 fill
                 sizes="608px"
@@ -159,8 +191,8 @@ export default function Home() {
         <div className="md:hidden space-y-8 max-w-md mx-auto">
           <div className="relative aspect-[3/4] w-full overflow-hidden">
             <Image
-              src="/images/L1008186.JPG"
-              alt="Potter working with clay"
+              src={homeImages[2]}
+              alt="Pottery"
               fill
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-cover"
@@ -170,8 +202,8 @@ export default function Home() {
           </div>
           <div className="relative aspect-[3/4] w-full overflow-hidden">
             <Image
-              src="/images/DSCF4399.JPG"
-              alt="Finished ceramic pieces"
+              src={homeImages[3]}
+              alt="Ceramic pieces"
               fill
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-cover"
@@ -185,8 +217,8 @@ export default function Home() {
           {/* Left image - starts lower */}
           <div className="absolute left-0 top-[128px] w-[47.5%] aspect-[608/810.664] overflow-hidden">
             <Image
-              src="/images/L1008186.JPG"
-              alt="Potter working with clay"
+              src={homeImages[2]}
+              alt="Pottery"
               fill
               sizes="47.5vw"
               className="object-cover"
@@ -197,8 +229,8 @@ export default function Home() {
           {/* Right image - starts at top */}
           <div className="absolute right-0 top-0 w-[47.5%] aspect-[608/810.664] overflow-hidden">
             <Image
-              src="/images/DSCF4399.JPG"
-              alt="Finished ceramic pieces"
+              src={homeImages[3]}
+              alt="Ceramic pieces"
               fill
               sizes="47.5vw"
               className="object-cover"
