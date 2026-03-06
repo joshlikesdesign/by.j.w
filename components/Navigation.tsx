@@ -22,18 +22,19 @@ export default function Navigation() {
         }
         const isOpen = overlay.style.display === 'flex'
         overlay.style.display = isOpen ? 'none' : 'flex'
-        if (button) {
-          button.textContent = isOpen ? 'Menu' : 'Close'
+        const btn = document.getElementById('menu-toggle-btn')
+        if (btn) {
+          btn.textContent = isOpen ? 'Menu' : 'Close'
+          btn.setAttribute('aria-expanded', String(!isOpen))
         }
       }
 
       // Remove any existing listeners
       const newButton = button.cloneNode(true)
       button.parentNode?.replaceChild(newButton, button)
-      
-      // Add listeners to new button - click should work normally
+
+      // Add click listener only — button element handles touch natively
       newButton.addEventListener('click', toggle, false)
-      newButton.addEventListener('touchstart', toggle, false)
 
       // Keyboard shortcut
       const handleKey = (e: KeyboardEvent) => {
@@ -64,9 +65,13 @@ export default function Navigation() {
 
   return (
     <>
-      <div
+      <button
         id="menu-toggle-btn"
-        className="fixed top-[41.5px] right-8 z-[999999] cursor-pointer text-white font-sans text-sm tracking-wide uppercase hover:opacity-80 transition-opacity mix-blend-difference"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-overlay-div"
+        aria-label="Toggle navigation menu"
+        className="fixed top-[41.5px] right-8 z-[999999] cursor-pointer text-white font-sans text-sm tracking-wide uppercase hover:opacity-80 transition-opacity mix-blend-difference bg-transparent border-0 p-0"
         style={{
           zIndex: 999999,
           pointerEvents: 'auto',
@@ -74,7 +79,7 @@ export default function Navigation() {
         }}
       >
         Menu
-      </div>
+      </button>
 
       <div
         id="menu-overlay-div"

@@ -95,23 +95,46 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
 
           {/* Price and purchase section */}
-          <div className="border-t border-foreground/10 pt-8 sm:pt-12 md:pt-16 pb-6 sm:pb-8 space-y-6 sm:space-y-8 md:space-y-12">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-6 md:gap-8">
-              <span 
+          <div className="border-t border-foreground/10 pt-8 sm:pt-12 md:pt-16 pb-6 sm:pb-8 space-y-6 sm:space-y-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8">
+              <span
                 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[42px] leading-tight text-foreground"
                 style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
               >
                 £{product.price}
               </span>
-              <a 
-                href={`mailto:joshwilburne@gmail.com?subject=Inquiry about ${product.name}`}
-                className="inline-block w-full md:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-foreground text-light font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-80 transition-opacity duration-300 text-center md:ml-auto"
-              >
-                CONTACT FOR PURCHASE
-              </a>
+
+              {!product.available ? (
+                <span className="font-sans text-xs tracking-[1.04px] uppercase text-muted border border-foreground/20 px-8 py-3 text-center">
+                  Sold
+                </span>
+              ) : (
+                <div className="flex flex-col sm:flex-row gap-3 md:ml-auto w-full md:w-auto">
+                  {product.stripePaymentLink && (
+                    <a
+                      href={product.stripePaymentLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-foreground text-light font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-80 transition-opacity duration-300 text-center"
+                    >
+                      Buy Now
+                    </a>
+                  )}
+                  <a
+                    href={`mailto:joshwilburne@gmail.com?subject=Inquiry about ${product.name}`}
+                    className={`inline-block w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-60 transition-opacity duration-300 text-center border ${
+                      product.stripePaymentLink
+                        ? 'border-foreground/30 text-foreground'
+                        : 'bg-foreground text-light border-foreground hover:opacity-80'
+                    }`}
+                  >
+                    {product.stripePaymentLink ? 'Ask a Question' : 'Contact to Purchase'}
+                  </a>
+                </div>
+              )}
             </div>
             <p className="text-muted text-xs sm:text-[13px] font-light">
-              All pieces are carefully packed and shipped within 3–5 business days. For international shipping or collection in person, please contact us directly.
+              Carefully packed and shipped within 3–5 business days. For international shipping or collection in person, get in touch directly.
             </p>
           </div>
         </div>
@@ -141,7 +164,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         alt={relatedProduct.imageAlt || relatedProduct.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="object-cover group-hover:opacity-90 transition-opacity duration-300"
                         quality={75}
                         loading="lazy"
                       />

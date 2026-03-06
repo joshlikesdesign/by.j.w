@@ -237,7 +237,6 @@ export default function Gallery() {
                       className={`object-cover transition-opacity duration-300 ${image.loaded ? 'opacity-100' : 'opacity-0'}`}
                       quality={70}
                       loading={index < 6 ? "eager" : "lazy"}
-                      unoptimized
                       onLoad={() => setImageLoaded(image.src)}
                       onError={() => setImageLoaded(image.src)}
                     />
