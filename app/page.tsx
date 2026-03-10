@@ -271,35 +271,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Split CTA — Collection / Archive ── */}
+      {/* ── Split CTA — Archive / About ── */}
       <section className="relative z-20 bg-paper border-t border-foreground/10">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 divide-y divide-foreground/10 md:grid-cols-2 md:divide-x md:divide-y-0">
-          <Link
-            href="/collection"
-            className="group flex min-h-[200px] cursor-pointer flex-col justify-between p-8 transition-colors duration-200 hover:bg-foreground/[0.025] sm:min-h-[260px] sm:p-12 md:p-16"
-          >
-            <p className="font-sans text-[10px] tracking-[2px] uppercase text-muted">
-              Browse
-            </p>
-            <div className="flex items-end justify-between">
-              <h2
-                className="font-serif leading-[0.92] text-foreground"
-                style={{
-                  fontSize: 'clamp(36px, 5vw, 80px)',
-                  fontVariationSettings: "'SOFT' 0, 'WONK' 1",
-                }}
-              >
-                Collection
-              </h2>
-              <svg
-                width="28" height="14" viewBox="0 0 24 12" fill="none"
-                className="mb-1 ml-4 shrink-0 transition-transform duration-200 group-hover:translate-x-2"
-              >
-                <path d="M0 6H22M22 6L17 1M22 6L17 11" stroke="#2B2621" strokeWidth="1.5" />
-              </svg>
-            </div>
-          </Link>
-
           <Link
             href="/gallery"
             className="group flex min-h-[200px] cursor-pointer flex-col justify-between p-8 transition-colors duration-200 hover:bg-foreground/[0.025] sm:min-h-[260px] sm:p-12 md:p-16"
@@ -318,6 +292,32 @@ export default function Home() {
                 Archive
                 <br />
                 of Works
+              </h2>
+              <svg
+                width="28" height="14" viewBox="0 0 24 12" fill="none"
+                className="mb-1 ml-4 shrink-0 transition-transform duration-200 group-hover:translate-x-2"
+              >
+                <path d="M0 6H22M22 6L17 1M22 6L17 11" stroke="#2B2621" strokeWidth="1.5" />
+              </svg>
+            </div>
+          </Link>
+
+          <Link
+            href="/about"
+            className="group flex min-h-[200px] cursor-pointer flex-col justify-between p-8 transition-colors duration-200 hover:bg-foreground/[0.025] sm:min-h-[260px] sm:p-12 md:p-16"
+          >
+            <p className="font-sans text-[10px] tracking-[2px] uppercase text-muted">
+              Learn more
+            </p>
+            <div className="flex items-end justify-between">
+              <h2
+                className="font-serif leading-[0.92] text-foreground"
+                style={{
+                  fontSize: 'clamp(36px, 5vw, 80px)',
+                  fontVariationSettings: "'SOFT' 0, 'WONK' 1",
+                }}
+              >
+                About
               </h2>
               <svg
                 width="28" height="14" viewBox="0 0 24 12" fill="none"

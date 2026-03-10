@@ -47,7 +47,16 @@ export default function About() {
               >
                 designer
               </a>
-              {' '}and potter making small, functional stoneware for everyday use.
+              {' '}and potter making small, functional stoneware for everyday use. I also build tools for makers, like{' '}
+              <a
+                href="https://potterytracker.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:opacity-60 transition-opacity"
+              >
+                Pottery Tracker
+              </a>
+              .
             </p>
             <p 
               className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
@@ -132,7 +141,7 @@ export default function About() {
           </div>
 
           {/* Instagram link */}
-          <div className="max-w-[672px] space-y-3">
+          <div className="max-w-[672px] space-y-3 mb-12 sm:mb-16">
             <p 
               className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
@@ -174,6 +183,7 @@ export default function About() {
               </span>
             </a>
           </div>
+
         </div>
       </div>
     </main>
