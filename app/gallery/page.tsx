@@ -215,9 +215,10 @@ export default function Gallery() {
                   <div
                     className={`relative overflow-hidden shadow-lg transition-all duration-500 ${
                       image.isExpanded && !isMobile
-                        ? 'aspect-[4/3]' 
+                        ? 'flex items-center justify-center bg-stone-100' 
                         : 'aspect-[3/4]'
                     }`}
+                    style={image.isExpanded && !isMobile ? { minHeight: '70vh', maxHeight: '85vh' } : undefined}
                   >
                     {/* Skeleton placeholder - visible until image loads */}
                     {!image.loaded && (
@@ -226,20 +227,32 @@ export default function Gallery() {
                         aria-hidden
                       />
                     )}
-                    <Image
-                      src={image.src}
-                      alt={`Archive image ${index + 1}`}
-                      fill
-                      sizes={image.isExpanded && !isMobile
-                        ? "(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 100vw"
-                        : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      }
-                      className={`object-cover transition-opacity duration-300 ${image.loaded ? 'opacity-100' : 'opacity-0'}`}
-                      quality={70}
-                      loading={index < 6 ? "eager" : "lazy"}
-                      onLoad={() => setImageLoaded(image.src)}
-                      onError={() => setImageLoaded(image.src)}
-                    />
+                    {image.isExpanded && !isMobile ? (
+                      <Image
+                        src={image.src}
+                        alt={`Archive image ${index + 1}`}
+                        width={1200}
+                        height={1600}
+                        sizes="100vw"
+                        className={`max-w-full max-h-[85vh] w-auto h-auto object-contain transition-opacity duration-300 ${image.loaded ? 'opacity-100' : 'opacity-0'}`}
+                        quality={85}
+                        loading="eager"
+                        onLoad={() => setImageLoaded(image.src)}
+                        onError={() => setImageLoaded(image.src)}
+                      />
+                    ) : (
+                      <Image
+                        src={image.src}
+                        alt={`Archive image ${index + 1}`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className={`object-cover transition-opacity duration-300 ${image.loaded ? 'opacity-100' : 'opacity-0'}`}
+                        quality={70}
+                        loading={index < 6 ? "eager" : "lazy"}
+                        onLoad={() => setImageLoaded(image.src)}
+                        onError={() => setImageLoaded(image.src)}
+                      />
+                    )}
                     {/* Expand button - only on desktop */}
                     {!isMobile && !image.isExpanded && (
                       <button
