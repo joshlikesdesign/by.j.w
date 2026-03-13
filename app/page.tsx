@@ -94,11 +94,11 @@ export default function Home() {
       {/* Fixed headline — pinned to viewport, disappears behind hero on scroll */}
       <div className="fixed top-[15vh] sm:top-[20vh] md:top-[25vh] left-1/2 -translate-x-1/2 z-[16] max-w-[1280px] w-full px-4 sm:px-8 md:px-16 text-center mix-blend-difference pointer-events-none">
         <h1
-          className="font-serif leading-[1.1] tracking-tight text-[48px] sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[128px] 2xl:text-[160px]"
+          className="leading-[1.05] tracking-tight text-[44px] sm:text-[44px] md:text-[60px] lg:text-[88px] xl:text-[116px] 2xl:text-[144px]"
           style={{
-            fontVariationSettings: "'SOFT' 0, 'WONK' 1",
+            fontFamily: 'var(--font-unbounded)',
             color: textColor,
-            fontWeight: 600,
+            fontWeight: 500,
           }}
         >
           Ceramics made by hand in East London.

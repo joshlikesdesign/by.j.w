@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Fraunces } from 'next/font/google'
+import { Inter, Fraunces, Unbounded } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 
@@ -16,6 +16,12 @@ const fraunces = Fraunces({
   axes: ['SOFT', 'WONK'],
 })
 
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  variable: '--font-unbounded',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'Studio Pottery',
   description: 'Ceramics made by hand in London',
@@ -28,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${fraunces.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} ${unbounded.variable} font-sans antialiased`}>
         <Navigation />
         {children}
       </body>
