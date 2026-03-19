@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Fraunces, Unbounded } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
+import CustomCursor from '@/components/CustomCursor'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,6 +36,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${fraunces.variable} ${unbounded.variable} font-sans antialiased`}>
+        {/* SVG filter for film grain */}
+        <svg aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0 }}>
+          <defs>
+            <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%" colorInterpolationFilters="linearRGB">
+              <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" stitchTiles="stitch" result="noise" />
+              <feColorMatrix type="saturate" values="0" in="noise" />
+            </filter>
+          </defs>
+        </svg>
+        {/* Animated grain overlay */}
+        <div className="grain-overlay" aria-hidden="true" />
+        <CustomCursor />
         <Navigation />
         {children}
       </body>

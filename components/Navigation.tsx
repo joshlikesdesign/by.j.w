@@ -20,8 +20,8 @@ export default function Navigation() {
           e.preventDefault()
           e.stopPropagation()
         }
-        const isOpen = overlay.style.display === 'flex'
-        overlay.style.display = isOpen ? 'none' : 'flex'
+        const isOpen = overlay.classList.contains('is-open')
+        overlay.classList.toggle('is-open')
         const btn = document.getElementById('menu-toggle-btn')
         if (btn) {
           btn.textContent = isOpen ? 'Menu' : 'Close'
@@ -83,6 +83,7 @@ export default function Navigation() {
 
       <div
         id="menu-overlay-div"
+        className="menu-overlay"
         style={{
           position: 'fixed',
           top: 0,
@@ -91,7 +92,7 @@ export default function Navigation() {
           bottom: 0,
           backgroundColor: '#2B2621',
           zIndex: 10000,
-          display: 'none',
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
@@ -104,8 +105,8 @@ export default function Navigation() {
                 onClick={() => {
                   const overlay = document.getElementById('menu-overlay-div')
                   const btn = document.getElementById('menu-toggle-btn')
-                  if (overlay) overlay.style.display = 'none'
-                  if (btn) btn.textContent = 'Menu'
+                  if (overlay) overlay.classList.remove('is-open')
+                  if (btn) { btn.textContent = 'Menu'; btn.setAttribute('aria-expanded', 'false') }
                 }}
                 className="block hover:opacity-60 transition-opacity font-serif text-4xl md:text-5xl lg:text-6xl text-light"
               >
@@ -118,8 +119,8 @@ export default function Navigation() {
                 onClick={() => {
                   const overlay = document.getElementById('menu-overlay-div')
                   const btn = document.getElementById('menu-toggle-btn')
-                  if (overlay) overlay.style.display = 'none'
-                  if (btn) btn.textContent = 'Menu'
+                  if (overlay) overlay.classList.remove('is-open')
+                  if (btn) { btn.textContent = 'Menu'; btn.setAttribute('aria-expanded', 'false') }
                 }}
                 className="block hover:opacity-60 transition-opacity font-serif text-4xl md:text-5xl lg:text-6xl text-light"
               >
@@ -132,8 +133,8 @@ export default function Navigation() {
                 onClick={() => {
                   const overlay = document.getElementById('menu-overlay-div')
                   const btn = document.getElementById('menu-toggle-btn')
-                  if (overlay) overlay.style.display = 'none'
-                  if (btn) btn.textContent = 'Menu'
+                  if (overlay) overlay.classList.remove('is-open')
+                  if (btn) { btn.textContent = 'Menu'; btn.setAttribute('aria-expanded', 'false') }
                 }}
                 className="block hover:opacity-60 transition-opacity font-serif text-4xl md:text-5xl lg:text-6xl text-light"
               >

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Logo from '@/components/Logo'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Fragment } from 'react'
 
 // Fallback images used until gallery loads and for SSR
 const DEFAULT_HOME_IMAGES = [
@@ -101,7 +101,14 @@ export default function Home() {
             fontWeight: 500,
           }}
         >
-          Ceramics made by hand in East London.
+          {['Ceramics', 'made', 'by', 'hand', 'in', 'East', 'London.'].map((word, i) => (
+            <Fragment key={i}>
+              <span className="hero-word" style={{ animationDelay: `${0.15 + i * 0.09}s` }}>
+                {word}
+              </span>
+              {i < 6 && ' '}
+            </Fragment>
+          ))}
         </h1>
       </div>
 
@@ -152,27 +159,31 @@ export default function Home() {
           </div>
           {/* Desktop: Overlapping images */}
           <div className="hidden md:block relative" style={{ height: '1100px' }}>
-            <div className="absolute left-[193px] top-[-21px] w-[608px] h-[768px] overflow-hidden">
-              <Image
-                src={homeImages[0]}
-                alt="Ceramic vessel"
-                fill
-                sizes="608px"
-                className="object-cover"
-                quality={75}
-                loading="lazy"
-              />
+            <div className="absolute left-[193px] top-[-21px] w-[608px] h-[768px] overflow-hidden group">
+              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                <Image
+                  src={homeImages[0]}
+                  alt="Ceramic vessel"
+                  fill
+                  sizes="608px"
+                  className="object-cover"
+                  quality={75}
+                  loading="lazy"
+                />
+              </div>
             </div>
-            <div className="absolute left-[576px] top-[400px] w-[608px] h-[768px] overflow-hidden">
-              <Image
-                src={homeImages[1]}
-                alt="Ceramic vessel"
-                fill
-                sizes="608px"
-                className="object-cover"
-                quality={75}
-                loading="lazy"
-              />
+            <div className="absolute left-[576px] top-[400px] w-[608px] h-[768px] overflow-hidden group">
+              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                <Image
+                  src={homeImages[1]}
+                  alt="Ceramic vessel"
+                  fill
+                  sizes="608px"
+                  className="object-cover"
+                  quality={75}
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -227,27 +238,31 @@ export default function Home() {
         </div>
         {/* Desktop: Side by side */}
         <div className="hidden md:block max-w-[1280px] mx-auto relative h-[938px]">
-          <div className="absolute left-0 top-[128px] w-[47.5%] aspect-[608/810.664] overflow-hidden">
-            <Image
-              src={homeImages[2]}
-              alt="Pottery"
-              fill
-              sizes="47.5vw"
-              className="object-cover"
-              quality={75}
-              loading="lazy"
-            />
+          <div className="absolute left-0 top-[128px] w-[47.5%] aspect-[608/810.664] overflow-hidden group">
+            <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+              <Image
+                src={homeImages[2]}
+                alt="Pottery"
+                fill
+                sizes="47.5vw"
+                className="object-cover"
+                quality={75}
+                loading="lazy"
+              />
+            </div>
           </div>
-          <div className="absolute right-0 top-0 w-[47.5%] aspect-[608/810.664] overflow-hidden">
-            <Image
-              src={homeImages[3]}
-              alt="Ceramic pieces"
-              fill
-              sizes="47.5vw"
-              className="object-cover"
-              quality={75}
-              loading="lazy"
-            />
+          <div className="absolute right-0 top-0 w-[47.5%] aspect-[608/810.664] overflow-hidden group">
+            <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+              <Image
+                src={homeImages[3]}
+                alt="Ceramic pieces"
+                fill
+                sizes="47.5vw"
+                className="object-cover"
+                quality={75}
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
