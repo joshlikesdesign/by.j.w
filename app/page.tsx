@@ -100,7 +100,7 @@ export default function Home() {
       {/* Fixed headline — pinned to viewport, bottom-anchored, disappears behind hero on scroll */}
       <div className="fixed bottom-[6vh] sm:bottom-[8vh] md:bottom-[10vh] left-0 right-0 z-[16] w-full px-4 sm:px-8 md:px-16 mix-blend-difference pointer-events-none overflow-hidden">
         <h1
-          className="leading-[0.88] tracking-tight"
+          className="leading-[0.88] tracking-tight text-center"
           style={{
             fontFamily: 'var(--font-instrument-serif)',
             color: textColor,
