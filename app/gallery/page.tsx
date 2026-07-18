@@ -165,9 +165,9 @@ export default function Gallery() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-16">
           {/* Page header */}
           <div className="mb-12 sm:mb-16 md:mb-20 reveal">
-            <h1 
-              className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-[120px] leading-tight text-[#352d25] tracking-tight mb-4"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+            <h1
+              className="font-serif leading-[0.85] text-[#352d25] tracking-tighter mb-6"
+              style={{ fontSize: 'clamp(56px, 12vw, 200px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
             >
               Archive of Works
             </h1>
@@ -203,11 +203,17 @@ export default function Gallery() {
               </div>
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 auto-rows-max">
-              {displayedImages.map((image, index) => (
+              {displayedImages.map((image, index) => {
+                const isFeature = index % 7 === 0 && !image.isExpanded
+                return (
                 <div
                   key={`${image.src}-${index}`}
                   className={`relative group reveal ${
-                    image.isExpanded && !isMobile ? 'col-span-1 sm:col-span-2 lg:col-span-3' : ''
+                    image.isExpanded && !isMobile
+                      ? 'col-span-1 sm:col-span-2 lg:col-span-3'
+                      : isFeature
+                        ? 'sm:col-span-2 lg:col-span-2'
+                        : ''
                   }`}
                   onMouseEnter={() => !isMobile && setHoveredIndex(index)}
                   onMouseLeave={() => !isMobile && setHoveredIndex(null)}
@@ -281,7 +287,8 @@ export default function Gallery() {
                     )}
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
             {/* Observer target for infinite scroll */}
             <div 

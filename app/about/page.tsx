@@ -9,141 +9,142 @@ export default function About() {
       <div className="pt-20 sm:pt-24 md:pt-32 pb-16 sm:pb-24 md:pb-32">
         <div className="max-w-[1839px] mx-auto px-4 sm:px-8 md:px-16">
           {/* Heading */}
-          <h1 
-            className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-[120px] leading-tight text-[#352d25] tracking-tight mb-8 sm:mb-12 md:mb-16 reveal"
-            style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+          <h1
+            className="font-serif leading-[0.85] text-[#352d25] tracking-tighter mb-12 sm:mb-16 md:mb-24 reveal"
+            style={{ fontSize: 'clamp(64px, 13vw, 220px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
           >
             About
           </h1>
 
-          {/* Studio workspace image */}
-          <div className="mb-16 group reveal">
-            <div className="relative w-full max-w-[756px] aspect-[756/945] bg-stone-200 overflow-hidden">
-              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
-                <Image
-                  src="/images/me_bw.jpeg"
-                  alt="Studio workspace"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 756px"
-                  className="object-cover"
-                  quality={75}
-                  loading="lazy"
-                />
+          {/* Row 1 — studio workspace image + intro text, asymmetric split */}
+          <div className="grid grid-cols-1 md:grid-cols-[1.05fr_0.95fr] gap-10 md:gap-16 mb-20 sm:mb-28 md:mb-40 items-start">
+            <div className="group reveal">
+              <div className="relative w-full aspect-[756/945] bg-stone-200 overflow-hidden">
+                <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                  <Image
+                    src="/images/me_bw.jpeg"
+                    alt="Studio workspace"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    quality={75}
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* First text section */}
-          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16 reveal">
-            <p 
-              className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              I'm a London-based{' '}
-              <a
-                href="https://josh.computer"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:opacity-60 transition-opacity"
-                aria-label="Josh's personal website"
+            <div className="space-y-6 sm:space-y-8 md:mt-16 reveal">
+              <p
+                className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-[38px] leading-[1.15] text-foreground tracking-tight"
+                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
               >
-                designer
-              </a>
-              {' '}and potter making small, functional stoneware for everyday use. I also build tools for makers, like{' '}
-              <a
-                href="https://potterytracker.xyz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:opacity-60 transition-opacity"
+                I'm a London-based{' '}
+                <a
+                  href="https://josh.computer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:opacity-60 transition-opacity"
+                  aria-label="Josh's personal website"
+                >
+                  designer
+                </a>
+                {' '}and potter making small, functional stoneware for everyday use. I also build tools for makers, like{' '}
+                <a
+                  href="https://potterytracker.xyz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:opacity-60 transition-opacity"
+                >
+                  Pottery Tracker
+                </a>
+                .
+              </p>
+              <p
+                className="font-serif text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground tracking-tight"
+                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
               >
-                Pottery Tracker
-              </a>
-              .
-            </p>
-            <p 
-              className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              My background in product design shapes how I work with clay, with a focus on form, proportion, and how an object feels in the hand. I'm drawn to simple, resolved pieces that fit naturally into daily life.
-            </p>
-            <p 
-              className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              Everything is made by hand on the wheel in small batches. I allow for variation and the marks of making, including glaze movement, small irregularities, and the effects of the kiln, so each piece is slightly different.
-            </p>
+                My background in product design shapes how I work with clay, with a focus on form, proportion, and how an object feels in the hand. I'm drawn to simple, resolved pieces that fit naturally into daily life.
+              </p>
+              <p
+                className="font-serif text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground tracking-tight"
+                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              >
+                Everything is made by hand on the wheel in small batches. I allow for variation and the marks of making, including glaze movement, small irregularities, and the effects of the kiln, so each piece is slightly different.
+              </p>
+            </div>
           </div>
 
-          {/* Ceramic vessel image */}
-          <div className="mb-16 ml-auto max-w-[756px] group reveal">
-            <div className="relative w-full aspect-[756/1008] bg-stone-200 overflow-hidden">
-              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
-                <Image
-                  src="/images/L1008166.JPG"
-                  alt="Ceramic vessel"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 756px"
-                  className="object-cover"
-                  quality={75}
-                  loading="lazy"
-                />
+          {/* Row 2 — Process text + ceramic vessel image, reversed & offset */}
+          <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-16 mb-20 sm:mb-28 md:mb-40 items-start">
+            <div className="space-y-6 sm:space-y-8 reveal">
+              <h2
+                className="font-serif leading-[0.9] text-[#352d25] tracking-tight"
+                style={{ fontSize: 'clamp(40px, 6vw, 88px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              >
+                Process
+              </h2>
+              <p
+                className="font-serif text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground tracking-tight"
+                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              >
+                I work mainly in stoneware for its strength and durability. Pieces are thrown, trimmed, sometimes altered, then bisque fired, glazed by hand, and fired again to around 1240°C. I use a mix of my own glazes and studio glazes, working mostly in muted, natural tones.
+              </p>
+              <p
+                className="font-serif text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground tracking-tight"
+                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              >
+                The kiln plays an active role in the final result. Placement, temperature, and chance all matter.
+              </p>
+            </div>
+            <div className="group reveal md:mt-20">
+              <div className="relative w-full aspect-[756/1008] bg-stone-200 overflow-hidden">
+                <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                  <Image
+                    src="/images/L1008166.JPG"
+                    alt="Ceramic vessel"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 55vw"
+                    className="object-cover"
+                    quality={75}
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Process section */}
-          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16 reveal">
-            <h2 
-              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-tight text-[#352d25] tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              Process
-            </h2>
-            <p 
-              className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              I work mainly in stoneware for its strength and durability. Pieces are thrown, trimmed, sometimes altered, then bisque fired, glazed by hand, and fired again to around 1240°C. I use a mix of my own glazes and studio glazes, working mostly in muted, natural tones.
-            </p>
-            <p 
-              className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              The kiln plays an active role in the final result. Placement, temperature, and chance all matter.
-            </p>
-          </div>
-
-          {/* Pottery detail image */}
-          <div className="mb-16 group reveal">
-            <div className="relative w-full max-w-[756px] aspect-[756/945] bg-stone-200 overflow-hidden">
-              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
-                <Image
-                  src="/images/IMG_6163.jpeg"
-                  alt="Pottery detail"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 756px"
-                  className="object-cover"
-                  quality={75}
-                  loading="lazy"
-                />
+          {/* Row 3 — pottery detail image + Use text, offset */}
+          <div className="grid grid-cols-1 md:grid-cols-[1.05fr_0.95fr] gap-10 md:gap-16 mb-20 sm:mb-28 md:mb-40 items-start">
+            <div className="group reveal">
+              <div className="relative w-full aspect-[756/945] bg-stone-200 overflow-hidden">
+                <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                  <Image
+                    src="/images/IMG_6163.jpeg"
+                    alt="Pottery detail"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    quality={75}
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Use section */}
-          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16 reveal">
-            <h2 
-              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-tight text-[#352d25] tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              Use
-            </h2>
-            <p 
-              className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-            >
-              These are practical objects, made to be used every day. They are meant to be handled, washed, stacked, and lived with. Dishwasher and microwave safe unless otherwise noted.
-            </p>
+            <div className="space-y-6 sm:space-y-8 md:mt-24 reveal">
+              <h2
+                className="font-serif leading-[0.9] text-[#352d25] tracking-tight"
+                style={{ fontSize: 'clamp(40px, 6vw, 88px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              >
+                Use
+              </h2>
+              <p
+                className="font-serif text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground tracking-tight"
+                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              >
+                These are practical objects, made to be used every day. They are meant to be handled, washed, stacked, and lived with. Dishwasher and microwave safe unless otherwise noted.
+              </p>
+            </div>
           </div>
 
           {/* Instagram link */}

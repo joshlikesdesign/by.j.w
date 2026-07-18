@@ -57,9 +57,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               <p className="text-muted text-[10px] sm:text-[11px] font-sans tracking-[1.1px] uppercase">
                 {product.category}
               </p>
-              <h1 
-                className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[72px] leading-tight text-foreground tracking-tight"
-                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              <h1
+                className="font-serif leading-[0.9] text-foreground tracking-tighter"
+                style={{ fontSize: 'clamp(40px, 7vw, 100px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
               >
                 {product.name}
               </h1>
@@ -143,8 +143,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         {product.relatedProducts && product.relatedProducts.length > 0 && (
           <div className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32 reveal">
             <h2
-              className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[42px] leading-tight text-foreground tracking-tight mb-8 sm:mb-12"
-              style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              className="font-serif leading-[0.9] text-foreground tracking-tight mb-8 sm:mb-12"
+              style={{ fontSize: 'clamp(32px, 5vw, 64px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
             >
               Related Products
             </h2>
@@ -187,9 +187,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
         {/* Final statement section */}
         <div className="max-w-[768px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32 reveal">
-          <p 
-            className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] leading-tight text-foreground tracking-tight"
-            style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+          <p
+            className="font-serif leading-[1.05] text-foreground tracking-tighter"
+            style={{ fontSize: 'clamp(28px, 4.5vw, 60px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
           >
             Made for everyday moments, not display. These pieces are meant to be part of your routines. Dishwasher and microwave safe.
           </p>

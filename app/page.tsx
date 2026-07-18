@@ -24,6 +24,9 @@ function shuffleArray<T>(array: T[]): T[] {
 
 const MARQUEE_TEXT = 'Hand-thrown\u2002·\u2002Stoneware\u2002·\u2002East London\u2002·\u2002Made to last\u2002·\u2002'
 
+const HERO_LEAD = 'Ceramics'
+const HERO_REST = ['made', 'by', 'hand', 'in', 'East', 'London.']
+
 export default function Home() {
   const targetSectionRef = useRef<HTMLElement>(null)
   const rafRef = useRef<number | null>(null)
@@ -71,8 +74,8 @@ export default function Home() {
     <main className="relative">
       <Logo />
 
-      {/* Hero Section - 90% height with background image */}
-      <section className="relative w-full overflow-hidden z-10" style={{ height: '90vh', backgroundColor: '#000' }}>
+      {/* Hero Section - full viewport height, full-bleed background image */}
+      <section className="relative w-full overflow-hidden z-10" style={{ height: '100dvh', backgroundColor: '#000' }}>
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/bg_cropped2.jpg"
@@ -87,28 +90,42 @@ export default function Home() {
         </div>
         <div
           className="absolute inset-0 z-[1]"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', pointerEvents: 'none' }}
+          style={{
+            background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.4) 100%)',
+            pointerEvents: 'none',
+          }}
         />
       </section>
 
-      {/* Fixed headline — pinned to viewport, disappears behind hero on scroll */}
-      <div className="fixed top-[15vh] sm:top-[20vh] md:top-[25vh] left-1/2 -translate-x-1/2 z-[16] max-w-[1280px] w-full px-4 sm:px-8 md:px-16 text-center mix-blend-difference pointer-events-none">
+      {/* Fixed headline — pinned to viewport, bottom-anchored, disappears behind hero on scroll */}
+      <div className="fixed bottom-[6vh] sm:bottom-[8vh] md:bottom-[10vh] left-0 right-0 z-[16] w-full px-4 sm:px-8 md:px-16 mix-blend-difference pointer-events-none overflow-hidden">
         <h1
-          className="leading-[1.05] tracking-tight text-[44px] sm:text-[44px] md:text-[60px] lg:text-[88px] xl:text-[116px] 2xl:text-[144px]"
+          className="leading-[0.82] tracking-tight"
           style={{
             fontFamily: 'var(--font-unbounded)',
             color: textColor,
-            fontWeight: 500,
+            fontWeight: 600,
           }}
         >
-          {['Ceramics', 'made', 'by', 'hand', 'in', 'East', 'London.'].map((word, i) => (
-            <Fragment key={i}>
-              <span className="hero-word" style={{ animationDelay: `${0.15 + i * 0.09}s` }}>
-                {word}
-              </span>
-              {i < 6 && ' '}
-            </Fragment>
-          ))}
+          <span
+            className="hero-word block"
+            style={{ animationDelay: '0.15s', letterSpacing: '-0.045em', fontSize: 'clamp(64px, 15vw, 300px)' }}
+          >
+            {HERO_LEAD}
+          </span>
+          <span
+            className="block font-normal mt-2 sm:mt-3 md:mt-4"
+            style={{ letterSpacing: '-0.01em', fontSize: 'clamp(22px, 3.6vw, 58px)' }}
+          >
+            {HERO_REST.map((word, i) => (
+              <Fragment key={i}>
+                <span className="hero-word" style={{ animationDelay: `${0.34 + i * 0.07}s` }}>
+                  {word}
+                </span>
+                {i < HERO_REST.length - 1 && ' '}
+              </Fragment>
+            ))}
+          </span>
         </h1>
       </div>
 
@@ -133,7 +150,7 @@ export default function Home() {
       <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-[15] bg-paper reveal">
         <div className="max-w-[1152px] mx-auto relative">
           {/* Mobile: Stack images vertically */}
-          <div className="md:hidden space-y-8">
+          <div className="xl:hidden space-y-8">
             <div className="relative aspect-[3/4] w-full max-w-md mx-auto overflow-hidden">
               <Image
                 src={homeImages[0]}
@@ -157,28 +174,31 @@ export default function Home() {
               />
             </div>
           </div>
-          {/* Desktop: Overlapping images */}
-          <div className="hidden md:block relative" style={{ height: '1100px' }}>
-            <div className="absolute left-[193px] top-[-21px] w-[608px] h-[768px] overflow-hidden group">
+          {/* Desktop: Overlapping images — asymmetric editorial collage */}
+          <div className="hidden xl:block relative" style={{ height: '1280px' }}>
+            <div className="absolute left-[80px] top-[-40px] w-[680px] h-[860px] overflow-hidden group shadow-2xl">
               <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
                 <Image
                   src={homeImages[0]}
                   alt="Ceramic vessel"
                   fill
-                  sizes="608px"
+                  sizes="680px"
                   className="object-cover"
                   quality={75}
                   loading="lazy"
                 />
               </div>
             </div>
-            <div className="absolute left-[576px] top-[400px] w-[608px] h-[768px] overflow-hidden group">
+            <div
+              className="absolute left-[760px] top-[560px] w-[420px] h-[540px] overflow-hidden group shadow-2xl"
+              style={{ transform: 'rotate(-3deg)' }}
+            >
               <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
                 <Image
                   src={homeImages[1]}
                   alt="Ceramic vessel"
                   fill
-                  sizes="608px"
+                  sizes="420px"
                   className="object-cover"
                   quality={75}
                   loading="lazy"
@@ -199,9 +219,9 @@ export default function Home() {
             background: 'linear-gradient(to bottom, rgba(245, 241, 236, 0) 0%, rgba(245, 241, 236, 0.5) 50%, rgba(245, 241, 236, 1) 100%)',
           }}
         />
-        <div className="relative z-[2] max-w-[768px] mx-auto">
+        <div className="relative z-[2] max-w-[920px] mx-auto">
           <p
-            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] leading-tight text-foreground tracking-tight"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[76px] leading-[1.02] text-foreground tracking-tighter"
             style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
           >
             Each piece is deliberately imperfect, showing the hand and the process. The objects carry the marks of their making.
@@ -267,21 +287,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Material & Process */}
-      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-48 z-20 bg-paper reveal">
-        <div className="max-w-[896px] mx-auto">
-          <div className="flex flex-col md:flex-row gap-8 sm:gap-12 md:gap-24 items-start">
-            <div className="flex-1">
-              <h2
-                className="mb-4 sm:mb-6 font-serif text-2xl sm:text-3xl md:text-[32px] leading-tight text-foreground"
-                style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
-              >
-                Material &amp; Process
-              </h2>
-              <p className="font-sans text-sm sm:text-[15px] font-light leading-relaxed text-muted">
-                Working primarily with stoneware, each piece is fired to high temperature in electric. Glazes are then applied by hand and the final piece is fired to over 1200ºC to make them dishwasher and microwave safe.
-              </p>
-            </div>
+      {/* Material & Process — asymmetric editorial split with ghost numeral */}
+      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-40 z-20 bg-paper reveal overflow-hidden">
+        <div className="max-w-[1280px] mx-auto relative">
+          <span
+            aria-hidden="true"
+            className="hidden md:block absolute -left-4 top-1/2 -translate-y-1/2 font-serif leading-none text-foreground/[0.05] select-none pointer-events-none"
+            style={{ fontSize: 'clamp(220px, 26vw, 440px)' }}
+          >
+            01
+          </span>
+          <div className="relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 md:gap-16 items-end">
+            <h2
+              className="font-serif leading-[0.9] tracking-tight text-foreground"
+              style={{ fontSize: 'clamp(40px, 8vw, 108px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+            >
+              Material
+              <br />
+              &amp; Process
+            </h2>
+            <p className="font-sans text-sm sm:text-base font-light leading-relaxed text-muted max-w-md md:pb-3">
+              Working primarily with stoneware, each piece is fired to high temperature in electric. Glazes are then applied by hand and the final piece is fired to over 1200ºC to make them dishwasher and microwave safe.
+            </p>
           </div>
         </div>
       </section>
@@ -298,9 +325,9 @@ export default function Home() {
             </p>
             <div className="flex items-end justify-between">
               <h2
-                className="font-serif leading-[0.92] text-foreground"
+                className="font-serif leading-[0.88] tracking-tight text-foreground"
                 style={{
-                  fontSize: 'clamp(36px, 5vw, 80px)',
+                  fontSize: 'clamp(40px, 7vw, 120px)',
                   fontVariationSettings: "'SOFT' 0, 'WONK' 1",
                 }}
               >
@@ -326,9 +353,9 @@ export default function Home() {
             </p>
             <div className="flex items-end justify-between">
               <h2
-                className="font-serif leading-[0.92] text-foreground"
+                className="font-serif leading-[0.88] tracking-tight text-foreground"
                 style={{
-                  fontSize: 'clamp(36px, 5vw, 80px)',
+                  fontSize: 'clamp(40px, 7vw, 120px)',
                   fontVariationSettings: "'SOFT' 0, 'WONK' 1",
                 }}
               >

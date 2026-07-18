@@ -24,7 +24,10 @@ export default function Collection() {
 
         {/* Page header */}
         <div className="mb-12 sm:mb-16 reveal">
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground mb-4 tracking-tight">
+          <h1
+            className="font-serif leading-[0.85] text-foreground mb-6 tracking-tighter"
+            style={{ fontSize: 'clamp(56px, 11vw, 180px)' }}
+          >
             Collection
           </h1>
           <p className="text-muted text-sm sm:text-base font-light max-w-xl">
@@ -52,15 +55,17 @@ export default function Collection() {
 
         {/* Product grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 sm:gap-y-20 reveal">
-          {filtered.map(product => (
+          {filtered.map((product, index) => {
+            const isFeature = index === 0
+            return (
             <Link
               key={product.id}
               href={`/collection/${product.id}`}
-              className={`group block cursor-pointer card-lift ${!product.available ? 'opacity-50' : ''}`}
+              className={`group block cursor-pointer card-lift ${!product.available ? 'opacity-50' : ''} ${isFeature ? 'sm:col-span-2' : ''}`}
               aria-label={`${product.name}, £${product.price}${!product.available ? ', sold' : ''}`}
             >
               {/* Image */}
-              <div className="relative aspect-[3/4] overflow-hidden bg-stone-100 mb-5">
+              <div className={`relative overflow-hidden bg-stone-100 mb-5 ${isFeature ? 'aspect-[16/9]' : 'aspect-[3/4]'}`}>
                 <Image
                   src={product.image}
                   alt={product.imageAlt || product.name}
@@ -96,16 +101,17 @@ export default function Collection() {
                   <p className="text-muted font-sans text-[10px] tracking-[1.1px] uppercase mb-1">
                     {product.category}
                   </p>
-                  <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug group-hover:opacity-70 transition-opacity duration-150">
+                  <h2 className={`font-serif text-foreground leading-snug tracking-tight group-hover:opacity-70 transition-opacity duration-150 ${isFeature ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl'}`}>
                     {product.name}
                   </h2>
                 </div>
-                <p className="font-serif text-xl sm:text-2xl text-foreground shrink-0 pt-5">
+                <p className={`font-serif text-foreground shrink-0 pt-5 ${isFeature ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl'}`}>
                   £{product.price}
                 </p>
               </div>
             </Link>
-          ))}
+            )
+          })}
         </div>
 
         {filtered.length === 0 && (
