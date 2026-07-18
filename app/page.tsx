@@ -109,13 +109,13 @@ export default function Home() {
         >
           <span
             className="hero-word block"
-            style={{ animationDelay: '0.15s', letterSpacing: '-0.045em', fontSize: 'clamp(64px, 15vw, 300px)' }}
+            style={{ animationDelay: '0.15s', letterSpacing: '-0.008em', fontSize: 'clamp(64px, 15vw, 300px)' }}
           >
             {HERO_LEAD}
           </span>
           <span
-            className="block font-normal mt-2 sm:mt-3 md:mt-4"
-            style={{ letterSpacing: '-0.01em', fontSize: 'clamp(22px, 3.6vw, 58px)' }}
+            className="block font-normal mt-3 sm:mt-4 md:mt-5"
+            style={{ letterSpacing: '0em', fontSize: 'clamp(22px, 3.6vw, 58px)' }}
           >
             {HERO_REST.map((word, i) => (
               <Fragment key={i}>
