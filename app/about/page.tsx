@@ -10,29 +10,31 @@ export default function About() {
         <div className="max-w-[1839px] mx-auto px-4 sm:px-8 md:px-16">
           {/* Heading */}
           <h1 
-            className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-[120px] leading-tight text-[#352d25] tracking-tight mb-8 sm:mb-12 md:mb-16"
+            className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-[120px] leading-tight text-[#352d25] tracking-tight mb-8 sm:mb-12 md:mb-16 reveal"
             style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
           >
             About
           </h1>
 
           {/* Studio workspace image */}
-          <div className="mb-16">
+          <div className="mb-16 group reveal">
             <div className="relative w-full max-w-[756px] aspect-[756/945] bg-stone-200 overflow-hidden">
-              <Image
-                src="/images/me_bw.jpeg"
-                alt="Studio workspace"
-                fill
-                sizes="(max-width: 768px) 100vw, 756px"
-                className="object-cover"
-                quality={75}
-                loading="lazy"
-              />
+              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                <Image
+                  src="/images/me_bw.jpeg"
+                  alt="Studio workspace"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 756px"
+                  className="object-cover"
+                  quality={75}
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
 
           {/* First text section */}
-          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16">
+          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16 reveal">
             <p 
               className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
@@ -73,22 +75,24 @@ export default function About() {
           </div>
 
           {/* Ceramic vessel image */}
-          <div className="mb-16 ml-auto max-w-[756px]">
+          <div className="mb-16 ml-auto max-w-[756px] group reveal">
             <div className="relative w-full aspect-[756/1008] bg-stone-200 overflow-hidden">
-              <Image
-                src="/images/L1008166.JPG"
-                alt="Ceramic vessel"
-                fill
-                sizes="(max-width: 768px) 100vw, 756px"
-                className="object-cover"
-                quality={75}
-                loading="lazy"
-              />
+              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                <Image
+                  src="/images/L1008166.JPG"
+                  alt="Ceramic vessel"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 756px"
+                  className="object-cover"
+                  quality={75}
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
 
           {/* Process section */}
-          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16">
+          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16 reveal">
             <h2 
               className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-tight text-[#352d25] tracking-tight"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
@@ -110,22 +114,24 @@ export default function About() {
           </div>
 
           {/* Pottery detail image */}
-          <div className="mb-16">
+          <div className="mb-16 group reveal">
             <div className="relative w-full max-w-[756px] aspect-[756/945] bg-stone-200 overflow-hidden">
-              <Image
-                src="/images/IMG_6163.jpeg"
-                alt="Pottery detail"
-                fill
-                sizes="(max-width: 768px) 100vw, 756px"
-                className="object-cover"
-                quality={75}
-                loading="lazy"
-              />
+              <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                <Image
+                  src="/images/IMG_6163.jpeg"
+                  alt="Pottery detail"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 756px"
+                  className="object-cover"
+                  quality={75}
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
 
           {/* Use section */}
-          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16">
+          <div className="max-w-[672px] space-y-6 sm:space-y-8 mb-12 sm:mb-16 reveal">
             <h2 
               className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-tight text-[#352d25] tracking-tight"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
@@ -141,7 +147,7 @@ export default function About() {
           </div>
 
           {/* Instagram link */}
-          <div className="max-w-[672px] space-y-3 mb-12 sm:mb-16">
+          <div className="max-w-[672px] space-y-3 mb-12 sm:mb-16 reveal">
             <p 
               className="font-serif text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-relaxed sm:leading-[48px] text-foreground tracking-tight"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
@@ -162,7 +168,8 @@ export default function About() {
               href="https://instagram.com/by.j.w"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 hover:opacity-60 transition-opacity"
+              className="inline-flex items-center gap-3 hover:opacity-60 hover:-translate-y-0.5 transition-all duration-300"
+              style={{ transitionTimingFunction: 'var(--ease-snap)' }}
               aria-label="Instagram @by.j.w"
             >
               <svg 

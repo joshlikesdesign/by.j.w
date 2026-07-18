@@ -130,7 +130,7 @@ export default function Home() {
       </div>
 
       {/* Centered Image Section - Two images overlapping */}
-      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-[15] bg-paper">
+      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-[15] bg-paper reveal">
         <div className="max-w-[1152px] mx-auto relative">
           {/* Mobile: Stack images vertically */}
           <div className="md:hidden space-y-8">
@@ -190,7 +190,7 @@ export default function Home() {
       </section>
 
       {/* Typography Section — covers fixed h1 on scroll */}
-      <section ref={targetSectionRef} className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-20 bg-paper">
+      <section ref={targetSectionRef} className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-20 bg-paper reveal">
         {/* Gradient overlay at top */}
         <div
           className="absolute top-0 left-0 right-0 z-[1] pointer-events-none"
@@ -210,7 +210,7 @@ export default function Home() {
       </section>
 
       {/* Editorial Image Pair Section */}
-      <section className="relative px-4 sm:px-8 md:px-16 py-12 sm:py-16 md:py-24 z-20 bg-paper">
+      <section className="relative px-4 sm:px-8 md:px-16 py-12 sm:py-16 md:py-24 z-20 bg-paper reveal">
         {/* Mobile: Stack images */}
         <div className="md:hidden space-y-8 max-w-md mx-auto">
           <div className="relative aspect-[3/4] w-full overflow-hidden">
@@ -268,7 +268,7 @@ export default function Home() {
       </section>
 
       {/* Material & Process */}
-      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-48 z-20 bg-paper">
+      <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-48 z-20 bg-paper reveal">
         <div className="max-w-[896px] mx-auto">
           <div className="flex flex-col md:flex-row gap-8 sm:gap-12 md:gap-24 items-start">
             <div className="flex-1">
@@ -287,7 +287,7 @@ export default function Home() {
       </section>
 
       {/* ── Split CTA — Archive / About ── */}
-      <section className="relative z-20 bg-paper border-t border-foreground/10">
+      <section className="relative z-20 bg-paper border-t border-foreground/10 reveal">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 divide-y divide-foreground/10 md:grid-cols-2 md:divide-x md:divide-y-0">
           <Link
             href="/gallery"
@@ -346,7 +346,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative px-4 sm:px-8 md:px-16 py-8 sm:py-12 z-20 bg-paper border-t border-foreground/10">
+      <footer className="relative px-4 sm:px-8 md:px-16 py-8 sm:py-12 z-20 bg-paper border-t border-foreground/10 reveal">
         <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-muted font-sans text-sm">
             © Josh Wilburne
@@ -356,7 +356,8 @@ export default function Home() {
               href="https://instagram.com/by.j.w"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block hover:opacity-60 transition-opacity"
+              className="inline-block hover:opacity-60 hover:-translate-y-0.5 transition-all duration-300"
+              style={{ transitionTimingFunction: 'var(--ease-snap)' }}
               aria-label="Instagram @by.j.w"
             >
               <svg

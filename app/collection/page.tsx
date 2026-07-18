@@ -23,7 +23,7 @@ export default function Collection() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-16 pt-24 sm:pt-32 md:pt-40 pb-24 sm:pb-32">
 
         {/* Page header */}
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-12 sm:mb-16 reveal">
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground mb-4 tracking-tight">
             Collection
           </h1>
@@ -51,12 +51,12 @@ export default function Collection() {
         </div>
 
         {/* Product grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 sm:gap-y-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 sm:gap-y-20 reveal">
           {filtered.map(product => (
             <Link
               key={product.id}
               href={`/collection/${product.id}`}
-              className={`group block cursor-pointer ${!product.available ? 'opacity-50' : ''}`}
+              className={`group block cursor-pointer card-lift ${!product.available ? 'opacity-50' : ''}`}
               aria-label={`${product.name}, £${product.price}${!product.available ? ', sold' : ''}`}
             >
               {/* Image */}
@@ -66,8 +66,8 @@ export default function Collection() {
                   alt={product.imageAlt || product.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className={`object-cover transition-opacity duration-300 ${
-                    product.available ? 'group-hover:opacity-90' : ''
+                  className={`object-cover transition-all duration-700 ease-out ${
+                    product.available ? 'group-hover:opacity-90 group-hover:scale-105' : ''
                   }`}
                   quality={75}
                   loading="lazy"
@@ -113,7 +113,7 @@ export default function Collection() {
         )}
 
         {/* Archive link */}
-        <div className="mt-24 sm:mt-32 pt-12 border-t border-foreground/10">
+        <div className="mt-24 sm:mt-32 pt-12 border-t border-foreground/10 reveal">
           <Link
             href="/gallery"
             className="group inline-flex items-center gap-3 hover:opacity-60 transition-opacity"

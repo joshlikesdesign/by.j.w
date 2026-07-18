@@ -71,11 +71,12 @@ export default function Navigation() {
         aria-expanded="false"
         aria-controls="menu-overlay-div"
         aria-label="Toggle navigation menu"
-        className="fixed top-[41.5px] right-8 z-[999999] cursor-pointer text-white font-sans text-sm tracking-wide uppercase hover:opacity-80 transition-opacity mix-blend-difference bg-transparent border-0 p-0"
+        className="fixed top-[41.5px] right-8 z-[999999] cursor-pointer text-white font-sans text-sm tracking-wide uppercase hover:opacity-80 hover:scale-105 transition-all duration-300 mix-blend-difference bg-transparent border-0 p-0"
         style={{
           zIndex: 999999,
           pointerEvents: 'auto',
           userSelect: 'none',
+          transitionTimingFunction: 'var(--ease-snap)',
         }}
       >
         Menu

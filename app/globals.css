@@ -5,6 +5,11 @@
 :root {
   --font-fraunces: 'Fraunces', Georgia, serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Easing palette (VibeCurb awwwards-motion) — named curves only, no CSS keyword easings */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @layer base {
@@ -195,6 +200,42 @@
     transition: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ─── CTA Hover Physics — primary buttons (Buy Now, Ask a Question) ─── */
+.cta-lift {
+  transition: transform 0.45s var(--ease-spring), box-shadow 0.35s var(--ease-snap);
+}
+.cta-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(43, 38, 33, 0.16);
+}
+.cta-lift:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.1s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-lift,
+  .cta-lift:hover,
+  .cta-lift:active {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ─── Card Hover Lift — collection & related-product cards ─── */
+.card-lift {
+  transition: transform 0.5s var(--ease-snap);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift,
+  .card-lift:hover {
+    transform: none;
+    transition: none;
   }
 }
 

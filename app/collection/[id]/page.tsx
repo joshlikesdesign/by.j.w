@@ -40,7 +40,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         {/* Main content section */}
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-16">
           {/* Image gallery section */}
-          <div className="mb-16">
+          <div className="mb-16 reveal">
             <ProductImageGallery
               mainImage={product.image}
               thumbnails={[product.image2, product.image3, product.image4].filter(Boolean) as string[]}
@@ -51,7 +51,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
 
           {/* Product information section */}
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-16">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-16 reveal">
             {/* Left column - Product title and description */}
             <div className="space-y-4 sm:space-y-6">
               <p className="text-muted text-[10px] sm:text-[11px] font-sans tracking-[1.1px] uppercase">
@@ -95,7 +95,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
 
           {/* Price and purchase section */}
-          <div className="border-t border-foreground/10 pt-8 sm:pt-12 md:pt-16 pb-6 sm:pb-8 space-y-6 sm:space-y-8">
+          <div className="border-t border-foreground/10 pt-8 sm:pt-12 md:pt-16 pb-6 sm:pb-8 space-y-6 sm:space-y-8 reveal">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8">
               <span
                 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[42px] leading-tight text-foreground"
@@ -115,14 +115,14 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                       href={product.stripePaymentLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-foreground text-light font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-80 transition-opacity duration-300 text-center"
+                      className="cta-lift inline-block w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-foreground text-light font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-80 transition-opacity duration-300 text-center"
                     >
                       Buy Now
                     </a>
                   )}
                   <a
                     href={`mailto:joshwilburne@gmail.com?subject=Inquiry about ${product.name}`}
-                    className={`inline-block w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-60 transition-opacity duration-300 text-center border ${
+                    className={`cta-lift inline-block w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 font-sans text-xs sm:text-[13px] tracking-[1.04px] uppercase hover:opacity-60 transition-opacity duration-300 text-center border ${
                       product.stripePaymentLink
                         ? 'border-foreground/30 text-foreground'
                         : 'bg-foreground text-light border-foreground hover:opacity-80'
@@ -141,8 +141,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
         {/* Related Products Section */}
         {product.relatedProducts && product.relatedProducts.length > 0 && (
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32">
-            <h2 
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32 reveal">
+            <h2
               className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[42px] leading-tight text-foreground tracking-tight mb-8 sm:mb-12"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
             >
@@ -156,7 +156,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                   <Link
                     key={relatedId}
                     href={`/collection/${relatedId}`}
-                    className="group block"
+                    className="group block card-lift"
                   >
                     <div className="relative aspect-[3/4] bg-stone-200 overflow-hidden mb-4">
                       <Image
@@ -164,7 +164,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         alt={relatedProduct.imageAlt || relatedProduct.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover group-hover:opacity-90 transition-opacity duration-300"
+                        className="object-cover transition-all duration-700 ease-out group-hover:opacity-90 group-hover:scale-105"
                         quality={75}
                         loading="lazy"
                       />
@@ -186,7 +186,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         )}
 
         {/* Final statement section */}
-        <div className="max-w-[768px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32">
+        <div className="max-w-[768px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32 reveal">
           <p 
             className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] leading-tight text-foreground tracking-tight"
             style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}

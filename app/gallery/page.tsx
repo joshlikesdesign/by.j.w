@@ -164,7 +164,7 @@ export default function Gallery() {
       <div className="pt-20 sm:pt-24 md:pt-32 pb-16 sm:pb-24 md:pb-32">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-16">
           {/* Page header */}
-          <div className="mb-12 sm:mb-16 md:mb-20">
+          <div className="mb-12 sm:mb-16 md:mb-20 reveal">
             <h1 
               className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-[120px] leading-tight text-[#352d25] tracking-tight mb-4"
               style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
@@ -206,7 +206,7 @@ export default function Gallery() {
               {displayedImages.map((image, index) => (
                 <div
                   key={`${image.src}-${index}`}
-                  className={`relative group ${
+                  className={`relative group reveal ${
                     image.isExpanded && !isMobile ? 'col-span-1 sm:col-span-2 lg:col-span-3' : ''
                   }`}
                   onMouseEnter={() => !isMobile && setHoveredIndex(index)}
@@ -246,7 +246,7 @@ export default function Gallery() {
                         alt={`Archive image ${index + 1}`}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className={`object-cover transition-opacity duration-300 ${image.loaded ? 'opacity-100' : 'opacity-0'}`}
+                        className={`object-cover transition-all duration-700 ease-out group-hover:scale-105 ${image.loaded ? 'opacity-100' : 'opacity-0'}`}
                         quality={70}
                         loading={index < 6 ? "eager" : "lazy"}
                         onLoad={() => setImageLoaded(image.src)}

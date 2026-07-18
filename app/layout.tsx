@@ -3,6 +3,7 @@ import { Inter, Fraunces, Unbounded } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import CustomCursor from '@/components/CustomCursor'
+import ScrollReveal from '@/components/ScrollReveal'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -49,6 +50,7 @@ export default function RootLayout({
         <div className="grain-overlay" aria-hidden="true" />
         <CustomCursor />
         <Navigation />
+        <ScrollReveal />
         {children}
       </body>
     </html>
