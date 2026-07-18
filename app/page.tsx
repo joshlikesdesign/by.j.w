@@ -100,21 +100,21 @@ export default function Home() {
       {/* Fixed headline — pinned to viewport, bottom-anchored, disappears behind hero on scroll */}
       <div className="fixed bottom-[6vh] sm:bottom-[8vh] md:bottom-[10vh] left-0 right-0 z-[16] w-full px-4 sm:px-8 md:px-16 mix-blend-difference pointer-events-none overflow-hidden">
         <h1
-          className="leading-[0.82] tracking-tight"
+          className="leading-[0.88] tracking-tight"
           style={{
-            fontFamily: 'var(--font-unbounded)',
+            fontFamily: 'var(--font-instrument-serif)',
             color: textColor,
-            fontWeight: 600,
+            fontWeight: 400,
           }}
         >
           <span
             className="hero-word block"
-            style={{ animationDelay: '0.15s', letterSpacing: '-0.008em', fontSize: 'clamp(64px, 15vw, 300px)' }}
+            style={{ animationDelay: '0.15s', letterSpacing: '-0.01em', fontSize: 'clamp(64px, 15vw, 300px)' }}
           >
             {HERO_LEAD}
           </span>
           <span
-            className="block font-normal mt-3 sm:mt-4 md:mt-5"
+            className="block mt-3 sm:mt-4 md:mt-5"
             style={{ letterSpacing: '0em', fontSize: 'clamp(22px, 3.6vw, 58px)' }}
           >
             {HERO_REST.map((word, i) => (

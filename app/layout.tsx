@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Fraunces, Unbounded } from 'next/font/google'
+import { Inter, Fraunces, Instrument_Serif } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import CustomCursor from '@/components/CustomCursor'
@@ -18,9 +18,10 @@ const fraunces = Fraunces({
   axes: ['SOFT', 'WONK'],
 })
 
-const unbounded = Unbounded({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-unbounded',
+  weight: '400',
+  variable: '--font-instrument-serif',
   display: 'swap',
 })
 
@@ -36,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${fraunces.variable} ${unbounded.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} ${instrumentSerif.variable} font-sans antialiased`}>
         {/* SVG filter for film grain */}
         <svg aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0 }}>
           <defs>
