@@ -80,9 +80,15 @@
   pointer-events: none;
   z-index: 99998;
   opacity: 0.065;
-  filter: url(#grain-filter);
-  background: #fff;
+  /* Baked noise texture, not a live SVG filter — the browser rasterizes this
+     once and tiles it like any other background image, so the animation
+     below only ever moves a GPU-composited layer (no per-frame filter
+     recompute, no main-thread repaint). */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch' result='noise'/%3E%3CfeColorMatrix type='saturate' values='0' in='noise'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
   animation: grain-shift 0.45s steps(1) infinite;
+  will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
   .grain-overlay { animation: none; }
