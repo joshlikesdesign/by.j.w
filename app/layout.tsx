@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Fraunces, Instrument_Serif } from 'next/font/google'
+import { Inter, Fraunces, Instrument_Serif, Archivo_Black } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import CustomCursor from '@/components/CustomCursor'
@@ -25,6 +25,13 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 })
 
+const archivoBlack = Archivo_Black({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-archivo-black',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'Studio Pottery',
   description: 'Ceramics made by hand in London',
@@ -37,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${fraunces.variable} ${instrumentSerif.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} ${instrumentSerif.variable} ${archivoBlack.variable} font-sans antialiased`}>
         {/* SVG filter for film grain */}
         <svg aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0 }}>
           <defs>

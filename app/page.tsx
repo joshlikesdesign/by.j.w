@@ -325,10 +325,11 @@ export default function Home() {
             </p>
             <div className="flex items-end justify-between">
               <h2
-                className="font-serif leading-[0.88] tracking-tight text-foreground"
+                className="leading-[0.88] text-foreground"
                 style={{
-                  fontSize: 'clamp(40px, 7vw, 120px)',
-                  fontVariationSettings: "'SOFT' 0, 'WONK' 1",
+                  fontFamily: 'var(--font-archivo-black)',
+                  fontSize: 'clamp(36px, 6.2vw, 104px)',
+                  letterSpacing: '-0.02em',
                 }}
               >
                 Archive
@@ -353,10 +354,11 @@ export default function Home() {
             </p>
             <div className="flex items-end justify-between">
               <h2
-                className="font-serif leading-[0.88] tracking-tight text-foreground"
+                className="leading-[0.88] text-foreground"
                 style={{
-                  fontSize: 'clamp(40px, 7vw, 120px)',
-                  fontVariationSettings: "'SOFT' 0, 'WONK' 1",
+                  fontFamily: 'var(--font-archivo-black)',
+                  fontSize: 'clamp(36px, 6.2vw, 104px)',
+                  letterSpacing: '-0.02em',
                 }}
               >
                 About
