@@ -58,8 +58,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 {product.category}
               </p>
               <h1
-                className="font-serif leading-[0.9] text-foreground tracking-tighter"
-                style={{ fontSize: 'clamp(40px, 7vw, 100px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+                className="leading-[0.9] text-foreground"
+                style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(40px, 7vw, 100px)', letterSpacing: '-0.02em' }}
               >
                 {product.name}
               </h1>
@@ -143,8 +143,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         {product.relatedProducts && product.relatedProducts.length > 0 && (
           <div className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32 reveal">
             <h2
-              className="font-serif leading-[0.9] text-foreground tracking-tight mb-8 sm:mb-12"
-              style={{ fontSize: 'clamp(32px, 5vw, 64px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              className="leading-[0.9] text-foreground mb-8 sm:mb-12"
+              style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(32px, 5vw, 64px)', letterSpacing: '-0.02em' }}
             >
               Related Products
             </h2>

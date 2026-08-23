@@ -109,7 +109,8 @@ export default function Navigation() {
                   if (overlay) overlay.classList.remove('is-open')
                   if (btn) { btn.textContent = 'Menu'; btn.setAttribute('aria-expanded', 'false') }
                 }}
-                className="block hover:opacity-60 transition-opacity font-serif text-4xl md:text-5xl lg:text-6xl text-light"
+                className="block hover:opacity-60 transition-opacity text-4xl md:text-5xl lg:text-6xl text-light"
+                style={{ fontFamily: 'var(--font-archivo-black)', letterSpacing: '-0.02em' }}
               >
                 Home
               </Link>
@@ -123,7 +124,8 @@ export default function Navigation() {
                   if (overlay) overlay.classList.remove('is-open')
                   if (btn) { btn.textContent = 'Menu'; btn.setAttribute('aria-expanded', 'false') }
                 }}
-                className="block hover:opacity-60 transition-opacity font-serif text-4xl md:text-5xl lg:text-6xl text-light"
+                className="block hover:opacity-60 transition-opacity text-4xl md:text-5xl lg:text-6xl text-light"
+                style={{ fontFamily: 'var(--font-archivo-black)', letterSpacing: '-0.02em' }}
               >
                 About
               </Link>
@@ -137,7 +139,8 @@ export default function Navigation() {
                   if (overlay) overlay.classList.remove('is-open')
                   if (btn) { btn.textContent = 'Menu'; btn.setAttribute('aria-expanded', 'false') }
                 }}
-                className="block hover:opacity-60 transition-opacity font-serif text-4xl md:text-5xl lg:text-6xl text-light"
+                className="block hover:opacity-60 transition-opacity text-4xl md:text-5xl lg:text-6xl text-light"
+                style={{ fontFamily: 'var(--font-archivo-black)', letterSpacing: '-0.02em' }}
               >
                 Archive of Works
               </Link>

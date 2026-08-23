@@ -20,9 +20,9 @@ export default function Error({
     <main className="min-h-screen bg-paper">
       <Logo />
       <div className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-8 text-center">
-        <h1 
-          className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-4"
-          style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl text-foreground mb-4"
+          style={{ fontFamily: 'var(--font-archivo-black)', letterSpacing: '-0.02em' }}
         >
           Something went wrong
         </h1>

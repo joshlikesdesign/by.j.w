@@ -10,8 +10,8 @@ export default function About() {
         <div className="max-w-[1839px] mx-auto px-4 sm:px-8 md:px-16">
           {/* Heading */}
           <h1
-            className="font-serif leading-[0.85] text-[#352d25] tracking-tighter mb-12 sm:mb-16 md:mb-24 reveal"
-            style={{ fontSize: 'clamp(64px, 13vw, 220px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+            className="leading-[0.85] text-[#352d25] mb-12 sm:mb-16 md:mb-24 reveal"
+            style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(64px, 13vw, 220px)', letterSpacing: '-0.02em' }}
           >
             About
           </h1>
@@ -79,8 +79,8 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-16 mb-20 sm:mb-28 md:mb-40 items-start">
             <div className="space-y-6 sm:space-y-8 reveal">
               <h2
-                className="font-serif leading-[0.9] text-[#352d25] tracking-tight"
-                style={{ fontSize: 'clamp(40px, 6vw, 88px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+                className="leading-[0.9] text-[#352d25]"
+                style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(40px, 6vw, 88px)', letterSpacing: '-0.02em' }}
               >
                 Process
               </h2>
@@ -133,8 +133,8 @@ export default function About() {
             </div>
             <div className="space-y-6 sm:space-y-8 md:mt-24 reveal">
               <h2
-                className="font-serif leading-[0.9] text-[#352d25] tracking-tight"
-                style={{ fontSize: 'clamp(40px, 6vw, 88px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+                className="leading-[0.9] text-[#352d25]"
+                style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(40px, 6vw, 88px)', letterSpacing: '-0.02em' }}
               >
                 Use
               </h2>

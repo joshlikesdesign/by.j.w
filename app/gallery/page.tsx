@@ -166,8 +166,8 @@ export default function Gallery() {
           {/* Page header */}
           <div className="mb-12 sm:mb-16 md:mb-20 reveal">
             <h1
-              className="font-serif leading-[0.85] text-[#352d25] tracking-tighter mb-6"
-              style={{ fontSize: 'clamp(56px, 12vw, 200px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              className="leading-[0.85] text-[#352d25] mb-6"
+              style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(56px, 12vw, 200px)', letterSpacing: '-0.02em' }}
             >
               Archive of Works
             </h1>

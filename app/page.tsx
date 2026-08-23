@@ -299,8 +299,8 @@ export default function Home() {
           </span>
           <div className="relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 md:gap-16 items-end">
             <h2
-              className="font-serif leading-[0.9] tracking-tight text-foreground"
-              style={{ fontSize: 'clamp(40px, 8vw, 108px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+              className="leading-[0.9] text-foreground"
+              style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(40px, 8vw, 108px)', letterSpacing: '-0.02em' }}
             >
               Material
               <br />
