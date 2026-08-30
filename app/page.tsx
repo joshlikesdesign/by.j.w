@@ -22,8 +22,6 @@ function shuffleArray<T>(array: T[]): T[] {
   return arr
 }
 
-const MARQUEE_TEXT = 'Hand-thrown\u2002·\u2002Stoneware\u2002·\u2002East London\u2002·\u2002Made to last\u2002·\u2002'
-
 const HERO_LEAD = 'Ceramics'
 const HERO_REST = ['made', 'by', 'hand', 'in', 'East', 'London.']
 
@@ -129,23 +127,6 @@ export default function Home() {
         </h1>
       </div>
 
-      {/* ── Marquee — first paper element, scrolls over the hero ── */}
-      <div className="relative overflow-hidden border-b border-foreground/10 bg-paper py-3 z-[15]">
-        <div className="marquee-track inline-flex whitespace-nowrap">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span key={`a${i}`} className="font-sans text-[11px] tracking-[2.5px] uppercase text-muted">
-              {MARQUEE_TEXT}
-            </span>
-          ))}
-          {/* Duplicate for seamless loop */}
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span key={`b${i}`} aria-hidden="true" className="font-sans text-[11px] tracking-[2.5px] uppercase text-muted">
-              {MARQUEE_TEXT}
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* Centered Image Section - Two images overlapping */}
       <section className="relative px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 z-[15] bg-paper reveal">
         <div className="max-w-[1152px] mx-auto relative">
@@ -221,8 +202,8 @@ export default function Home() {
         />
         <div className="relative z-[2] max-w-[920px] mx-auto">
           <p
-            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[76px] leading-[1.02] text-foreground tracking-tighter"
-            style={{ fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[76px] leading-[1.02] text-foreground"
+            style={{ fontFamily: 'var(--font-archivo-black)', letterSpacing: '-0.02em' }}
           >
             Each piece is deliberately imperfect, showing the hand and the process. The objects carry the marks of their making.
           </p>

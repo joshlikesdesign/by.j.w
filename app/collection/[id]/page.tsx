@@ -188,8 +188,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         {/* Final statement section */}
         <div className="max-w-[768px] mx-auto px-4 sm:px-8 md:px-16 mt-16 sm:mt-24 md:mt-32 reveal">
           <p
-            className="font-serif leading-[1.05] text-foreground tracking-tighter"
-            style={{ fontSize: 'clamp(28px, 4.5vw, 60px)', fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+            className="leading-[1.05] text-foreground"
+            style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(28px, 4.5vw, 60px)', letterSpacing: '-0.02em' }}
           >
             Made for everyday moments, not display. These pieces are meant to be part of your routines. Dishwasher and microwave safe.
           </p>
