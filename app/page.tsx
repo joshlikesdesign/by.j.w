@@ -203,7 +203,7 @@ export default function Home() {
         <div className="relative z-[2] max-w-[920px] mx-auto">
           <p
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[76px] leading-[1.02] text-foreground"
-            style={{ fontFamily: 'var(--font-archivo-black)', letterSpacing: '-0.02em' }}
+            style={{ fontFamily: 'var(--font-instrument-sans)', letterSpacing: '-0.02em' }}
           >
             Each piece is deliberately imperfect, showing the hand and the process. The objects carry the marks of their making.
           </p>
@@ -281,7 +281,7 @@ export default function Home() {
           <div className="relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 md:gap-16 items-end">
             <h2
               className="leading-[0.9] text-foreground"
-              style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(40px, 8vw, 108px)', letterSpacing: '-0.02em' }}
+              style={{ fontFamily: 'var(--font-instrument-sans)', fontSize: 'clamp(40px, 8vw, 108px)', letterSpacing: '-0.02em' }}
             >
               Material
               <br />
@@ -308,7 +308,7 @@ export default function Home() {
               <h2
                 className="leading-[0.88] text-foreground"
                 style={{
-                  fontFamily: 'var(--font-archivo-black)',
+                  fontFamily: 'var(--font-instrument-sans)',
                   fontSize: 'clamp(36px, 6.2vw, 104px)',
                   letterSpacing: '-0.02em',
                 }}
@@ -337,7 +337,7 @@ export default function Home() {
               <h2
                 className="leading-[0.88] text-foreground"
                 style={{
-                  fontFamily: 'var(--font-archivo-black)',
+                  fontFamily: 'var(--font-instrument-sans)',
                   fontSize: 'clamp(36px, 6.2vw, 104px)',
                   letterSpacing: '-0.02em',
                 }}

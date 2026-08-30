@@ -26,7 +26,7 @@ export default function Collection() {
         <div className="mb-12 sm:mb-16 reveal">
           <h1
             className="leading-[0.85] text-foreground mb-6"
-            style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(56px, 11vw, 180px)', letterSpacing: '-0.02em' }}
+            style={{ fontFamily: 'var(--font-instrument-sans)', fontSize: 'clamp(56px, 11vw, 180px)', letterSpacing: '-0.02em' }}
           >
             Collection
           </h1>

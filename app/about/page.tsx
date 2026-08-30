@@ -11,7 +11,7 @@ export default function About() {
           {/* Heading */}
           <h1
             className="leading-[0.85] text-[#352d25] mb-12 sm:mb-16 md:mb-24 reveal"
-            style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(64px, 13vw, 220px)', letterSpacing: '-0.02em' }}
+            style={{ fontFamily: 'var(--font-instrument-sans)', fontSize: 'clamp(64px, 13vw, 220px)', letterSpacing: '-0.02em' }}
           >
             About
           </h1>
@@ -80,7 +80,7 @@ export default function About() {
             <div className="space-y-6 sm:space-y-8 reveal">
               <h2
                 className="leading-[0.9] text-[#352d25]"
-                style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(40px, 6vw, 88px)', letterSpacing: '-0.02em' }}
+                style={{ fontFamily: 'var(--font-instrument-sans)', fontSize: 'clamp(40px, 6vw, 88px)', letterSpacing: '-0.02em' }}
               >
                 Process
               </h2>
@@ -134,7 +134,7 @@ export default function About() {
             <div className="space-y-6 sm:space-y-8 md:mt-24 reveal">
               <h2
                 className="leading-[0.9] text-[#352d25]"
-                style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(40px, 6vw, 88px)', letterSpacing: '-0.02em' }}
+                style={{ fontFamily: 'var(--font-instrument-sans)', fontSize: 'clamp(40px, 6vw, 88px)', letterSpacing: '-0.02em' }}
               >
                 Use
               </h2>

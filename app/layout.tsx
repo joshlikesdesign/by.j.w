@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Fraunces, Instrument_Serif, Archivo_Black } from 'next/font/google'
+import { Inter, Fraunces, Instrument_Serif, Instrument_Sans } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import CustomCursor from '@/components/CustomCursor'
@@ -25,10 +25,10 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 })
 
-const archivoBlack = Archivo_Black({
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
-  weight: '400',
-  variable: '--font-archivo-black',
+  weight: '600',
+  variable: '--font-instrument-sans',
   display: 'swap',
 })
 
@@ -44,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${fraunces.variable} ${instrumentSerif.variable} ${archivoBlack.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} ${instrumentSerif.variable} ${instrumentSans.variable} font-sans antialiased`}>
         {/* Animated grain overlay — texture is baked into the CSS background-image itself */}
         <div className="grain-overlay" aria-hidden="true" />
         <CustomCursor />

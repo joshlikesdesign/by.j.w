@@ -167,7 +167,7 @@ export default function Gallery() {
           <div className="mb-12 sm:mb-16 md:mb-20 reveal">
             <h1
               className="leading-[0.85] text-[#352d25] mb-6"
-              style={{ fontFamily: 'var(--font-archivo-black)', fontSize: 'clamp(56px, 12vw, 200px)', letterSpacing: '-0.02em' }}
+              style={{ fontFamily: 'var(--font-instrument-sans)', fontSize: 'clamp(56px, 12vw, 200px)', letterSpacing: '-0.02em' }}
             >
               Archive of Works
             </h1>
